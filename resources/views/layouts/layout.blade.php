@@ -14,7 +14,7 @@
         <header class="bg-white px-6 py-2 mx-5">
             @include("partials._nav")
         </header>
-        <main class="bg-gray-100 px-8 py-4">
+        <main class="bg-gray-100 px-8 py-4 ">
             @yield('content')
         </main>
         <footer>
