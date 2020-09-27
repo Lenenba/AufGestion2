@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Http;
-use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 class DashboardController extends Controller
 {
@@ -44,7 +41,7 @@ class DashboardController extends Controller
     public function listElements($modules, $elements)
     {
         $total = new Collection();
-        $date = Carbon::now()->subDays(2);
+        $date = Carbon::now()->subDays(5);
 
         $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
                             ->withHeaders([

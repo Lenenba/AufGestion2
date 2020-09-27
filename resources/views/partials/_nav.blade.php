@@ -3,7 +3,7 @@
                     <img src="/images/logo.png" alt="logo AUF" class="h-10 sm:ml-0 ">  
                     
                     <ul class=" flex text-xs lg:text-sm lg:ml-20 ml-6 text-gray-600 ">
-                        <li><a href="/">
+                    <a href="/"><li>
                             <div class="flex mx-4 items-center hover:text-gray-400 focus:text-gray-100 ">    
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-gray-600 ">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
@@ -11,7 +11,7 @@
                                 DASHBOARD
                            </div>
                         </li> </a><span class="text-gray-600"> | </span>
-                        <li>
+                        <a href="/supplier"><li>
                             <div class="flex mx-4 items-center hover:text-gray-400 focus:text-gray-100 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-gray-600 ">
                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
