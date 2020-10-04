@@ -41,7 +41,7 @@ class DashboardController extends Controller
     public function listElements($modules, $elements)
     {
         $total = new Collection();
-        $date = Carbon::now()->subDays(5);
+        $date = Carbon::now()->subDays(2);
 
         $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
                             ->withHeaders([

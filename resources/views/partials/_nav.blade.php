@@ -48,7 +48,7 @@
                         <span class="text-gray-600"> | </span>
                     <div class="flex items-center ml-4">
                         <h6 class="text-gray-600 hover:text-gray-400 focus:text-gray-100 text-sm">Jules BILITIK</h6>
-                        <img src="https://fr.gravatar.com/avatar/md5("bilitikjulesroger@yahoo.fr")" alt="logo AUF" class="w-10 ml-3 rounded rounded-full shadow-solid">  
+                        <img src="https://fr.gravatar.com/avatar/" alt="logo AUF" class="w-10 ml-3 rounded rounded-full shadow-solid">  
                     </div>
                 </div>
             </nav>

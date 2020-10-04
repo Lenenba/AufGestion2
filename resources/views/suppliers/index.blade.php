@@ -17,10 +17,10 @@
         @include('partials._smallCard', ['titre' => 'STAGIAIRE', 
                                         'elts' => $stagiaire, 
                                         'color' => 'orange'])
-        @include('partials._smallCard', ['titre' => 'STAGIAIRE NON-FI', 
+        @include('partials._smallCard', ['titre' => 'S No-FI', 
                                         'elts' => $stagiaireN, 
                                         'color' => 'yellow'])
-        @include('partials._smallCard', ['titre' => 'STAGIAIRE CO-FI', 
+        @include('partials._smallCard', ['titre' => 'S Co-FI', 
                                         'elts' => $stagiaireCo, 
                                         'color' => 'red'])
 
@@ -80,7 +80,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             <div>
-                                <a href="#" class="text-gray-600 mx-2 text-xs flex flex-col justify-items-center hover:text-gray-900">
+                                <a href="#" class="text-gray-600 mx-2 text-xs flex flex-col justify-items-center hover:text-gray-900" @click.prevent="$modal.show('test-modal')">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-gray-600 h-6 " viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                                     </svg>
@@ -111,6 +111,7 @@
                 <!-- More rows... -->
             </tbody>
             </table>
+
         </div>
     </div> 
     <div class="text-gray-600 text-sm my-6 bg-white mx-4 w-4/6 px-10 py-5 rounded-lg">
@@ -169,15 +170,21 @@
             </div>
 
             <div class="flex items-center mt-5">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded-lg shadow-lg focus:outline-none focus:shadow-outline" type="button">
                     Enregistrer
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 border rounded-lg p-2 border-blue-500 shadow-lg" href="#">
                     annuler
                 </a>
             </div>
         </form>
     </div>  
  </div>
+
+
+
+                <modal name="test-modal">
+                    This is my first modal
+                </modal>
 
 @endsection

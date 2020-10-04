@@ -48,8 +48,8 @@
                             <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                 @foreach($supp['addresses'] as $addresse)
                                     <div class="text-sm leading-5 text-gray-800">{{ $addresse['AddressName']}}</div>
-                                    <div class="text-xs leading-5 text-gray-600">{{ $addresse['Country']}} - {{ $addresse['AddressLine1']}} </div>
-                                @endforeach
+                                    <div class="text-xs leading-5 text-gray-600">{{ $addresse['Country']}} - {{ Illuminate\Support\Str::substr($addresse['AddressLine1'], 0,10) }} </div>
+                                @endforeach 
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                                 @foreach($supp['contacts'] as $contact)
