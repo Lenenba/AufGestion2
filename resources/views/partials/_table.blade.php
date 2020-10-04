@@ -1,5 +1,5 @@
      <div>
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"> 
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg my-10"> 
                 <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($suppliers as $supp)
+                    @foreach ($suppliers['items'] as $supp)
                         <tr>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 <div class="flex items-center">
