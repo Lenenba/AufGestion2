@@ -4,19 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
 window.Vue = require('vue');
 
-import Progress from 'easy-circular-progress';
 import VModal from 'vue-js-modal';
 import VueEllipseProgress from 'vue-ellipse-progress';
 
-
-Vue.use(VueEllipseProgress);
 Vue.use(VModal);
-Vue.use(Progress);
-
+Vue.use(VueEllipseProgress);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -28,8 +22,11 @@ Vue.use(Progress);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('progress-component', require('./components/ProgressComponent.vue').default);
+Vue.component('dropdown', require('./components/DropdownComponent.vue').default);
+Vue.component('sites-modal', require('./components/SitesModal.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

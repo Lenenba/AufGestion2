@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-<div class="flex items-center px-8 py-5">
+<div class="flex items-center mt-20 px-8 py-5">
 
         
         @include('partials._smallCard', ['titre' => 'REGULIER', 
