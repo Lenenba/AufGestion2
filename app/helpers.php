@@ -1,12 +1,8 @@
 <?php
 
-
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
-use Illuminate\Database\Eloquent\Collection;
-
- function listElements($modules, $elements, $append, $orderby)
+ function totalElts($modules, $elements, $append, $orderby)
  {
      $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
                         ->withHeaders([
@@ -19,3 +15,15 @@ use Illuminate\Database\Eloquent\Collection;
 
      return $objects;
  }
+
+  function listElts($liens)
+  {
+      $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
+        ->withHeaders([
+            'content-type' =>'application/json'])
+        ->timeout(1200)
+        ->get($liens)
+        ->json();
+
+      return $objects;
+  }

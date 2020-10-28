@@ -48,7 +48,7 @@
                                         </div>
                                     <div class="ml-4">
                                         <div class="text-xs leading-5 font-medium text-gray-900">
-                                            {{ $supp['SupplierNumber']}} |  {{ $supp['Supplier']}}
+                                            {{ $supp['SupplierNumber']}} |  {{ utf8_decode($supp['Supplier']) }}
                                         </div>
                                         <div class="text-xs leading-5 text-gray-500">
                                             {{ $supp['SupplierTypeCode']}} - {{ $supp['TaxOrganizationTypeCode']}}

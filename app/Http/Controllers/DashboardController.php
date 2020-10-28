@@ -6,10 +6,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $supplier =  listElements('fscmRestApi', 'suppliers', '', 'CreationDate');
-        $project =  listElements('fscmRestApi', 'projects', '', 'ProjectStartDate');
-        $employer =  listElements('hcmRestApi', 'emps', '', 'CreationDate');
-        $compte =  listElements('crmRestApi', 'accounts', '', 'CreationDate');
+        $supplier =  totalElts('fscmRestApi', 'suppliers', '', 'CreationDate');
+        $project =  totalElts('fscmRestApi', 'projects', '', 'ProjectStartDate');
+        $employer =  totalElts('hcmRestApi', 'emps', '', 'CreationDate');
+        $compte =  totalElts('crmRestApi', 'accounts', '', 'CreationDate');
 
 
         return view('dashboard.index', compact('supplier', 'project', 'compte', 'employer'));
