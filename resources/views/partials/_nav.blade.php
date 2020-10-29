@@ -28,8 +28,8 @@
 
                                 </template>
 
-                                <a href="/supplier" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">RECHERCHE</a>
-                                <a href="/supplier/create" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">NOUVEL DEMANDE</a>
+                                <a href="/suppliers" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">RECHERCHE</a>
+                                <a href="/suppliers/create" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">NOUVEL DEMANDE</a>
                                 <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">SUIVIS DEMANDE</a>
                                 <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">LISTE COMPTABLE</a>
 

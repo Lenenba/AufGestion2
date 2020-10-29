@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [DashboardController::class, 'index']);
-Route::get('/supplier', [SupplierController::class, 'index']);
-Route::get('/supplier/create', [SupplierController::class, 'create']);
+
+Route::get('/suppliers', [SupplierController::class, 'index']);
+Route::get('/suppliers/create', [SupplierController::class, 'create']);
+Route::post('/suppliers', [SupplierController::class, 'store']);

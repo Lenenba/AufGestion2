@@ -10,4 +10,14 @@ class Supplier extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     *  The path to the new supplier.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return "/suppliers/{$this->id}";
+    }
 }

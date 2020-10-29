@@ -24,7 +24,7 @@ class SupplierController extends Controller
         return view('suppliers.index', compact('suppliers', 'regulier', 'allocataire', 'missionnaire', 'membre', 'stagiaire', 'stagiaireN', 'stagiaireCo'));
     }
 
-    protected function create()
+    public function create()
     {
         $nationalite =  listElts('https://ejxa-dev1.fa.ca2.oraclecloud.com/fscmRestApi/resources/11.13.18.05/suppliers/300000023903020/child/DFF/300000023903020/lov/LVVO_nationalite?onlyData=true&limit=400');
         $paigroup =  listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000023903020/child/sites/300000024864475/lov/PayGroupLookup?onlyData=true&limit=490');
@@ -40,5 +40,21 @@ class SupplierController extends Controller
         $toleranceMontant = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/AmountTolerancesLookup');
         // dd($pays);
         return view('suppliers.create', compact('nationalite', 'paigroup', 'pays', 'project', 'typeMobilite', 'domaine', 'etablissemn', 'devise', 'discipline', 'region', 'paymentTerm', 'toleranceMontant'));
+    }
+
+    public function store()
+    {
+        $suppliers = request()->validate([
+            'typeFournisseur' => 'required',
+            'typeOrganisation'=> 'required',
+            'nomSite' => 'required|min:4',
+            'nomAdresse' => 'min:5',
+            'titreCivilite' =>'',
+            'nomFournisseur' =>'required|min:5',
+            'pays' =>'required'
+
+        ]);
+
+        dd($suppliers);
     }
 }
