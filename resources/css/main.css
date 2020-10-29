@@ -3,3 +3,26 @@
 @tailwind components;
 
 @tailwind utilities;
+
+
+
+@layer components {
+
+    .labelHead {
+      @apply block uppercase tracking-wide text-gray-700 text-lg;
+    }
+    .labelInput{
+        @apply block tracking-wide text-gray-500 text-xs font-bold mb-2;
+    }
+    .inputText{
+        @apply appearance-none block w-full text-gray-700 border rounded py-1 px-4 mb-3 leading-tight;
+        focus:outline-none bg-white;
+    }
+    .select{
+        @apply block appearance-none w-full border text-gray-700 py-1 px-4 pr-8 rounded leading-tight;
+        focus:outline-none;
+        focus:bg-white;
+        focus:border-gray-500;
+    }
+
+  }
