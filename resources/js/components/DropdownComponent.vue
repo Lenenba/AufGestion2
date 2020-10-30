@@ -1,6 +1,5 @@
 <template>
-    
-        <div class="dropdown ">
+         <div class="dropdown ">
             
             <div @click ="isOpen = !isOpen" @mouseout="isOpen = !isOpen">
                 <slot name="trigger"></slot>    

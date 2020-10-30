@@ -15,12 +15,13 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->enum('type', ['SUPPLIER', 'AUF_ALLOCATAIRE', 'AUF_MISSIONNAIRE', 'AUF_STAGIAIRE']);
-            $table->string('autreNom');
+            $table->string('nomFournisseur');
+            $table->string('autreNom')->nullable();
+            $table->enum('typeFournisseur', ['SUPPLIER', 'AUF_ALLOCATAIRE', 'AUF_MISSIONNAIRE', 'AUF_STAGIAIRE']);
+            $table->string('prestationFourni')->nullable();
             $table->integer('numero')->nullable();
             $table->enum('typeOrganisation', ['CORPORATION', 'INDIVIDUAL']);
-            $table->enum('statut', ['DFCG', 'COMPTABLE', 'DEMANDEUR', 'BROUILLON', 'A SUPPRIMER']);
+            $table->enum('statut', ['DFCG', 'COMPTABLE', 'DEMANDEUR', 'BROUILLON', 'A SUPPRIMER'])->default('BROUILLON');
             $table->timestamps();
         });
     }

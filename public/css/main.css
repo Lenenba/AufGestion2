@@ -622,6 +622,7 @@ video {
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
   font-size: 1.125rem;
+  text-align: center;
 }
 
 .labelInput{
@@ -675,6 +676,45 @@ video {
   focus:outline-none;
   focus:bg-white;
   focus:border-gray-500;
+}
+
+.submitButoon{
+  --bg-opacity: 1;
+  background-color: #4299e1;
+  background-color: rgba(66, 153, 225, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  font-weight: 700;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  hover:bg-blue-700;
+  focus:outline-none;
+  focus:shadow-outline;
+}
+
+.cancelButton{
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #4299e1;
+  border-color: rgba(66, 153, 225, var(--border-opacity));
+  --text-opacity: 1;
+  color: #a0aec0;
+  color: rgba(160, 174, 192, var(--text-opacity));
+  font-weight: 700;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  focus:outline-none;
+  focus:shadow-outline;
+  hover:bg-blue-100;
 }
 
 .space-y-0 > :not(template) ~ :not(template) {
