@@ -31,21 +31,21 @@
                     <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
                         <div class=" mr-2">
                             <div class="flex">
-                                <label for="typeFournisseur" class="labelInput" >
+                                <label  class="labelInput" >
                                     Type de Fournisseurs
                                 </label> 
                                 <span class="required text-red-600 ml-3">*</span>
                             </div>
                             <div class="relative">
-                                <select id="typeFournisseur" class="select"  :class="form.errors.typeFournisseur ? 'border-red-500' : 'border-gray-200'"
-                                        v-model="form.typeFournisseur">
-                                    <option></option>
+                                <select class="select"  :class="form.errors.typeFournisseur ? 'border-red-500' : 'border-gray-200'"
+                                        v-model="form.typeFournisseur" @click.prevent="allocataire">
+                                    <option disabled value=""></option>
                                     <option value="SUPPLIER">Fournisseur</option>
                                     <option value="AUF_ALLOCATAIRE">Auf Allocataire</option>
                                     <option value="AUF_MISSIONNAIRE">Auf Missionnaire</option>
                                     <option value="AUF_STAGIAIRE">Auf stagiaire</option>
-                                    <option>Auf stagiaire Co-Financé</option>
-                                    <option>Auf stagiaire Non-Financé</option>
+                                    <option value="AUF_STAGIAIRE">Auf stagiaire Co-Financé</option>
+                                    <option value="AUF_STAGIAIRE">Auf stagiaire Non-Financé</option>
                                 </select>
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -57,12 +57,29 @@
                                 Type d'Organisation
                             </label>
                             <div class="relative">
-                                <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
-                                v-model="form.typeOrganisation"  @click.prevent="valeurSite">
-                                    <option></option>
-                                    <option value="CORPORATION">Societé</option>
-                                    <option value="INDIVIDUAL">Personne Physique</option>
-                                </select>
+                                <div v-if=" form.typeFournisseur === 'SUPPLIER'">
+                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                    v-model="form.typeOrganisation" @click.prevent="allocataire2">
+                                        <option disabled value=""></option>
+                                        <option value="CORPORATION">Societé</option>
+                                        <option value="INDIVIDUAL">Personne Physique</option>
+                                    </select>
+                                </div>
+                                <div v-else-if=" form.typeFournisseur === ''">
+                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                    v-model="form.typeOrganisation" @click.prevent="allocataire2">
+                                        <option disabled value=""></option>
+                                        <option value="CORPORATION">Societé</option>
+                                        <option value="INDIVIDUAL">Personne Physique</option>
+                                    </select>
+                                </div>
+                                <div v-else>
+                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                    v-model="form.typeOrganisation" disabled>
+                                        <option disabled value=""></option>
+                                        <option value="INDIVIDUAL">Personne Physique</option>
+                                    </select>
+                                </div>
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                                 </div>
@@ -84,18 +101,35 @@
                     </div>
                     <div class="w-1/4 h-8 mx-6 my-4">
                         <span class="labelInput">Titre de Civilité</span>
-                                <div class="mt-2">
+                                
+                            <div v-if="!this.suppFields">
+                               <div class="mt-2">
                                     <label class="inline-flex items-center justify-between">
                                         <input type="radio" class="form-radio border" :class="form.errors.nomSite ? 'border-red-500' : 'border-gray-200'" 
-                                              value="Mr." v-model="form.titreCivilite" >
+                                              value="Mr." v-model="form.titreCiviliteE"  :disabled="!this.suppFields">
                                         <span class="block  tracking-wide text-gray-500 text-xs font-bold mx-2">Mr</span>
                                     </label>
                                     <label class="inline-flex items-center ml-6">
                                         <input type="radio" class="form-radio border" :class="form.errors.nomSite ? 'border-red-500' : 'border-gray-200'" 
-                                              value="Mme." v-model="form.titreCivilite">
+                                              value="Mme." v-model="form.titreCiviliteE" :disabled="!this.suppFields">
                                         <span class="block  tracking-wide text-gray-500 text-xs font-bold mx-2">Mme</span>
                                     </label>
                                 </div>
+                             </div>
+                            <div v-else>
+                                <div class="mt-2">
+                                        <label class="inline-flex items-center justify-between">
+                                            <input type="radio" class="form-radio border" :class="form.errors.nomSite ? 'border-red-500' : 'border-gray-200'" 
+                                                value="Mr." v-model="form.titreCivilite" :disabled="!this.suppFields">
+                                            <span class="block  tracking-wide text-gray-500 text-xs font-bold mx-2">Mr</span>
+                                        </label>
+                                        <label class="inline-flex items-center ml-6">
+                                            <input type="radio" class="form-radio border" :class="form.errors.nomSite ? 'border-red-500' : 'border-gray-200'" 
+                                                value="Mme." v-model="form.titreCivilite" :disabled="!this.suppFields">
+                                            <span class="block  tracking-wide text-gray-500 text-xs font-bold mx-2">Mme</span>
+                                        </label>
+                                    </div>
+                            </div>
                     </div>
                 </div>
 
@@ -104,11 +138,11 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
-                            <label class="labelInput" >
+                            <label class="labelInput">
                                 Nom du Fournisseur
                             </label>
                             <input class="uppercase inputText" :class="form.errors.nomFournisseur ? 'border-red-500' : 'border-gray-200'"
-                                   type="text" v-model="form.nomFournisseur" >
+                                   type="text" v-model="form.nomFournisseur">
                         </div>
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
                                 <div class=" mr-2">
@@ -117,7 +151,6 @@
                                 </label>
                                 <div class="relative">
                                     <select class="select" :class="form.errors.envoicde ? 'border-red-500' : 'border-gray-200'"  v-model="form.envoicde">
-                                        <option></option>
                                         <option value="NONE">Aucun</option>
                                         <option value="EMAIL">Courriel</option>
                                         <option value="FAX">Télécopie</option>
@@ -156,7 +189,12 @@
                             <label class="labelInput" >
                                     Nom
                             </label>
-                            <input class="inputText"  :class="form.errors.nomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.nomContact">
+                            <div v-if="!this.suppFields">
+                                <input class="inputText"  :class="form.errors.nomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.nomEntete" :disabled="!this.suppFields" >
+                            </div>
+                            <div v-else>
+                                <input class="inputText"  :class="form.errors.nomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.nomContact" :disabled="!this.suppFields" >
+                            </div>
                         </div>
                     </div>
 
@@ -185,7 +223,12 @@
                             <label class="labelInput" >
                                 Prénom
                             </label>
-                            <input class="inputText"  :class="form.errors.prenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.prenomContact">
+                            <div v-if="!this.suppFields">
+                                <input class="inputText"  :class="form.errors.prenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.prenomEntete" :disabled="!this.suppFields">
+                             </div>
+                            <div v-else>
+                                <input class="inputText"  :class="form.errors.prenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.prenomContact" :disabled="!this.suppFields">
+                            </div>
                         </div>
                     </div>
 
@@ -212,7 +255,7 @@
                                     Pays
                                 </label>
                                 <div class="relative">
-                                    <select class="select" :class="form.errors.pays ? 'border-red-500' : 'border-gray-200'" v-model="form.pays" @click.prevent="valeurSite">
+                                    <select class="select" :class="form.errors.pays ? 'border-red-500' : 'border-gray-200'" v-model="form.pays" @mouseleave="valeurSite">
                                             <option></option>
                                             <option v-for="pay in pays" :key="pay.index" :value="pay.TerritoryCode">{{ pay.TerritoryShortName }}</option>
                                      
@@ -226,14 +269,19 @@
                                 <label class="labelInput" >
                                     Ville
                                 </label>
-                                <input class="inputText" :class="form.errors.ville ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.ville">
+                                <input class="inputText" :class="form.errors.ville ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.ville" @mouseleave="valeurSite">
                             </div>
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <label class="labelInput" >
                                 Deuxieme Prénom
                             </label>
-                            <input class="inputText" :class="form.errors.deuxiemePrenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.deuxiemePrenomContact">
+                            <div v-if="!this.suppFields">
+                                <input class="inputText" :class="form.errors.deuxiemePrenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.deuxiemePrenomEntete" :disabled="!this.suppFields">
+                            </div>
+                            <div v-else>
+                                <input class="inputText" :class="form.errors.deuxiemePrenomContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.deuxiemePrenomContact" :disabled="!this.suppFields">
+                            </div>
                         </div>
                     </div>
 
@@ -243,6 +291,7 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
+                            <div :hidden="suppFields">
                                 <span class="labelInput">Titre de Civilité</span>
                                     <div class="mt-2">
                                         <label class="inline-flex items-center justify-between">
@@ -254,6 +303,7 @@
                                             <span class="block  tracking-wide text-gray-500 text-xs font-bold mx-2">Mme</span>
                                         </label>
                                     </div>
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 flex  mx-6 my-4">
                         <div class=" mr-2">
@@ -307,10 +357,12 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
-                            <label class="labelInput" >
-                                Nom
-                            </label>
-                            <input class="inputText" :class="form.errors.nomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.nomEntete">
+                            <div :hidden="suppFields">
+                                <label class="labelInput" >
+                                    Nom
+                                </label>
+                                <input class="inputText" :class="form.errors.nomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.nomEntete">
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
                             <div class=" mr-2">
@@ -377,10 +429,12 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
-                            <label class="labelInput" >
-                                Prénom
-                            </label>
-                            <input class="inputText" :class="form.errors.prenomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.prenomEntete">
+                            <div :hidden="suppFields">
+                                <label class="labelInput" >
+                                    Prénom
+                                </label>
+                                <input class="inputText" :class="form.errors.prenomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.prenomEntete">
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
                                 <label class="labelInput" >
@@ -390,7 +444,7 @@
                                     <select class="select" :class="form.errors.ventilation ? 'border-red-500' : 'border-gray-200'" v-model="form.ventilation">
                                         <option></option>
                                         <option>101-000-46710-000-000-000-000-000</option>
-                                        <option>101-000-41000-000-000-000-000-000</option>
+                                        <option>101-000-40100-000-000-000-000-000</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -433,10 +487,12 @@
 
                 <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
-                            <label class="labelInput" >
-                            Deuxieme Prénom
-                            </label>
-                            <input class="inputText" :class="form.errors.deuxiemePrenomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.deuxiemePrenomEntete">
+                            <div :hidden="suppFields">
+                                <label class="labelInput" >
+                                Deuxieme Prénom
+                                </label>
+                                <input class="inputText" :class="form.errors.deuxiemePrenomEntete ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.deuxiemePrenomEntete">
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
                             <div class="mr-2">
@@ -489,13 +545,13 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
-                            <div >
+                            <div :hidden="suppFields">
                                 <label class="labelInput" >
                                     Date de Deactivation
                                 </label>
                                 <input class="inputText" :class="form.errors.deactivationEntete ? 'border-red-500' : 'border-gray-200'" type="date" v-model="form.deactivationEntete">
                             </div>
-                            <div>
+                            <div :hidden="suppFields">
                                 <label class="labelInput" >
                                     Date de Naissance
                                 </label>
@@ -527,6 +583,8 @@
 
                     <div class="flex mx-10">
                         <div class="w-1/4 h-8 mx-6 my-4">
+                            <div :hidden="suppFields">
+
                             <label class="labelInput" >
                                         Nationalité
                                     </label>
@@ -539,35 +597,37 @@
                                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                                         </div>
                                     </div>
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
-                            <div class="mr-2">
-                            <label class="labelInput" >
-                                Projet
-                                </label>
-                                <div class="relative">
-                                    <select class="select" :class="form.errors.projet ? 'border-red-500' : 'border-gray-200'" v-model="form.projet">
-                                        <option></option>
-                                        <option v-for="projects in project" :key="projects.index" :value=" projects.Value ">{{ projects.Description.substring(0, 35) }}</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            <div  class="mr-2" :hidden="suppFields">
+                                    <label class="labelInput" >
+                                    Domaine
+                                    </label>
+                                    <div class="relative">
+                                        <select class="select" :class="form.errors.domaine ? 'border-red-500' : 'border-gray-200'" v-model="form.domaine">
+                                            <option></option>
+                                            <option v-for="domaines in domaine" :key="domaines.index" :value=" domaines.Value ">{{ domaines.Description.substring(0, 35) }}</option>
+
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            <div  :hidden="suppFields">
                                 <label class="labelInput" >
-                                Domaine
-                                </label>
-                                <div class="relative">
-                                    <select class="select" :class="form.errors.domaine ? 'border-red-500' : 'border-gray-200'" v-model="form.domaine">
-                                        <option></option>
-                                        <option v-for="domaines in domaine" :key="domaines.index">{{ domaines.Value }}</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    Discipline
+                                    </label>
+                                    <div class="relative">
+                                        <select class="select" :class="form.errors.discipline ? 'border-red-500' : 'border-gray-200'" v-model="form.discipline">
+                                            <option></option>
+                                            <option v-for="disciplines in discipline" :key="disciplines.index" :value=" disciplines.discipline ">{{ disciplines.discipline.substring(0, 35) }}</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
@@ -592,7 +652,7 @@
                         
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
-                            <div class="mr-2">
+                            <div class="mr-2" :hidden="suppFields">
                             <label class="labelInput" >
                                 Region
                                 </label>
@@ -606,7 +666,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div :hidden="suppFields">
                                 <label class="labelInput" >
                                 Type de Mobilité
                                 </label>
@@ -641,7 +701,7 @@
                         
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
-                            <div class="mr-2">
+                            <div class="mr-2" :hidden="suppFields">
                             <label class="labelInput" >
                                 Etablissement Origine
                                 </label>
@@ -655,7 +715,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div :hidden="suppFields">
                                 <label class="labelInput" >
                                 Etablissement Acceuil
                                 </label>
@@ -671,10 +731,33 @@
                             </div>
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
-                            <label class="labelInput" >
-                                Province / Etat / Canton 
-                            </label>
-                            <input class="inputText" :class="form.errors.province ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.province"> 
+                            <div v-if="form.pays ==='US'" :hidden="false">
+                                <div class="flex">
+                                    <label class="labelInput">
+                                        Etat
+                                    </label>
+                                    <span class="required text-red-600 ml-3">*</span>
+                                </div>
+                                <input class="inputText" :class="form.errors.etat ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.etat" required> 
+                            </div>
+                            <div v-else-if="form.pays ==='CA'" :hidden="false">
+                                <div class="flex">
+                                        <label class="labelInput" >
+                                            Provimce 
+                                        </label>
+                                    <span class="required text-red-600 ml-3">*</span>
+                                </div>
+                                <input class="inputText" :class="form.errors.province ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.province" required> 
+                            </div>
+                            <div v-else-if="form.pays ==='ZA'" :hidden="false">
+                                <div class="flex">
+                                        <label class="labelInput" >
+                                            Canton 
+                                        </label>
+                                    <span class="required text-red-600 ml-3">*</span>
+                                </div>
+                                <input class="inputText" :class="form.errors.canton ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.canton" required> 
+                            </div>
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
@@ -691,18 +774,18 @@
                         
                         </div>
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
-                            <div >
-                                <label class="labelInput" >
-                                    Date de Fin de Mobilité
-                                </label>
-                                <input class="inputText" :class="form.errors.debutMobilité ? 'border-red-500' : 'border-gray-200'" type="date" v-model="form.debutMobilité">
-                            </div>
-                            <div>
-                                <label class="labelInput" >
-                                    Date de Début de Mobilité
-                                </label>
-                                <input class="inputText":class="form.errors.finMobilité ? 'border-red-500' : 'border-gray-200'"  type="date" v-model="form.finMobilité">
-                            </div>
+                                <div :hidden="suppFields">
+                                    <label class="labelInput" >
+                                        Date de Fin de Mobilité
+                                    </label>
+                                    <input class="inputText" :class="form.errors.debutMobilité ? 'border-red-500' : 'border-gray-200'" type="date" v-model="form.debutMobilité">
+                                </div>
+                                <div :hidden="suppFields">
+                                    <label class="labelInput" >
+                                        Date de Début de Mobilité
+                                    </label>
+                                    <input class="inputText" :class="form.errors.finMobilité ? 'border-red-500' : 'border-gray-200'"  type="date" v-model="form.finMobilité">
+                                </div>
                         </div>  
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
@@ -722,26 +805,26 @@
                         
                         </div>
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
-                            <div class="mr-2">
-                            <label class="labelInput" >
-                                Discipline
-                                </label>
-                                <div class="relative">
-                                    <select class="select" :class="form.errors.discipline ? 'border-red-500' : 'border-gray-200'" v-model="form.discipline">
-                                        <option></option>
-                                        <option v-for="etablissemns in etablissemn" :key="etablissemns.index" :value=" etablissemns.Id ">{{ etablissemns.Description.substring(0, 35) }}</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                             <div class="mr-2" :hidden="suppFields">
+                                  <label class="labelInput" >
+                                    Projet
+                                    </label>
+                                    <div class="relative">
+                                        <select class="select" :class="form.errors.projet ? 'border-red-500' : 'border-gray-200'" v-model="form.projet">
+                                            <option></option>
+                                            <option v-for="projects in project" :key="projects.index" :value=" projects.Value ">{{ projects.Description.substring(0, 35) }}</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <label class="labelInput" >
-                                    Montant Unitaire
-                                </label>
-                                <input class="inputText" :class="form.errors.montantUnitaire ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.montantUnitaire">
-                            </div>   
+                                <div :hidden="suppFields">
+                                    <label class="labelInput" >
+                                        Montant Unitaire
+                                    </label>
+                                    <input class="inputText" :class="form.errors.montantUnitaire ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.montantUnitaire">
+                                </div>  
                         </div>  
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
@@ -787,6 +870,7 @@
                 'region', 'paymentterm', 'tolerancemontant'],
         data() {
             return {
+                suppFields:true,
                 form: new SupplierForm({
                     
                     // entete fields
@@ -865,7 +949,27 @@
         },
         methods: {
             valeurSite(){
-                return this.form.nomSite = this.form.pays + "-" + this.form.typeOrganisation         
+                return this.form.nomSite = this.form.pays + "-" + this.form.ville         
+            },
+
+            allocataire(){
+                if (this.form.typeFournisseur !== 'SUPPLIER') {
+                
+                    return this.form.typeOrganisation = "INDIVIDUAL", this.suppFields = false  
+
+                }else{
+                    return this.form.typeOrganisation = "", this.suppFields = true  
+                }
+            },
+
+            allocataire2(){
+                if (this.form.typeOrganisation === 'INDIVIDUAL' && this.form.typeFournisseur === 'SUPPLIER') {
+        
+                    return this.suppFields = false  
+                    
+                }else{
+                    return this.suppFields = true
+                }
             },
 
             async submit() {

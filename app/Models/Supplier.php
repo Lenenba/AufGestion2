@@ -11,13 +11,35 @@ class Supplier extends Model
 
     protected $guarded = [];
 
+
     /**
-     *  The path to the new supplier.
+     * Le fournisseur du site.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sites()
+    {
+        return $this->hasMany(Site::class)->latest('updated_at');
+    }
+
+    /**
+     * ajouter des sites au supplier.
+     *
+     * @param $site
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ajouterSite($site)
+    {
+        return $this->sites()->create($site);
+    }
+
+    /**
+     *  Chemin vers.
      *
      * @return string
      */
     public function path()
     {
-        return "/suppliers/{$this->id}";
+        return "/suppliers";
     }
 }

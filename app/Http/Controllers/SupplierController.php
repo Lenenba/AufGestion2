@@ -34,7 +34,7 @@ class SupplierController extends Controller
         $domaine = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_domaine?onlyData=true&limit=490');
         $etablissemn = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_etablissementAccueil?onlyData=true&limit=490');
         $devise = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_devise?onlyData=true&limit=490');
-        $discipline = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_disciplines?onlyData=true&limit=490');
+        $discipline = listElts2('https://ejxa-test-apps6.builder.ocp.oraclecloud.com/ic/builder/rt/App_FRS_Test/live/resources/data/DomainesEtDisciplines?onlyData=true&limit=200');
         $region = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_regionFournisseurAuf?onlyData=true&limit=490');
         $paymentterm = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/PaymentTermsLookup?onlyData=true&limit=490');
         $tolerancemontant = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/AmountTolerancesLookup');
@@ -45,20 +45,51 @@ class SupplierController extends Controller
     public function store()
     {
 
-        // entete typeFournisseur, typeOrganisation, nomFournisseur, prestationFourni, deactivationEntete, dateNaissance, titreCivilité, nomEntete, prenomEntete, deuxiemePrenomEntete, nationalite
-        // site nomSite, envoicde, modePaiement, courrielSite, paieOnRecip, conditionPaiement, groupePaie,tolerancesMontant, devise, ventilation, banque, iban, numeroCompteB, projet, domaine, region, mobilite, etablismnOrigine, etablismnAcceuil, debutMobilite, finMobilite, discipline, montantUnitaire
+        // entete deactivationEntete, dateNaissance, titreCivilité, nomEntete, prenomEntete, deuxiemePrenomEntete, nationalite
+        // site , , , , , , ,, , , , , , , , , , , , , , ,
         // adresses nomAdresse, adresse1, adresse2, pays, ville, codePostal, codeRegionaTelAdresse, codePaysTelAdresse, extensionTelAdresse, TelAdresse, codeRegFaxAdresse, codePaysFaxAdresse, faxAdresse, courrielAdresse, deactivationAdresse, province
         // contact titreCivilité, nomContact, prenomContact, deuxiemePrenomContact, intituleEmploi, codeRegionaTelContact, codePaysTelContact, extensionTelContact, TelContact, codeRegFaxContact, codePaysFaxContact, faxContact, courrielContact
 
 
-        $suppliersForm = request()->validate([
+        $supplierItems = request()->validate([
             'typeFournisseur' => 'required',
             'typeOrganisation'=> 'required',
-            'nomFournisseur' => 'required|min:4',
+            'nomFournisseur' => 'nullable',
+            'prestationFourni'=>'nullable',
+            'autreNom' =>'nullable',
+            'nationalite' =>'nullable'
         ]);
 
+        $siteItems = request()->validate([
+            'nomSite' => 'required',
+            'envoicde'=> 'nullable',
+            'modePaiement' => 'nullable',
+            'courrielSite'=>'nullable',
+            'paieOnRecip' =>'nullable',
+            'conditionPaiement' =>'nullable',
+            'groupePaie'=>'nullable',
+            'tolerancesMontant'=>'nullable',
+            'devise'=>'nullable',
+            'ventilation'=>'nullable',
+            'banque'=>'nullable',
+            'iban'=>'nullable',
+            'numeroCompteB'=>'nullable',
+            'projet'=>'nullable',
+            'domaine'=>'nullable',
+            'region'=>'nullable',
+            'mobilite'=>'nullable',
+            'etablismnOrigine'=>'nullable',
+            'etablismnAcceuil'=>'nullable',
+            'debutMobilite'=>'nullable',
+            'finMobilite'=>'nullable',
+            'discipline'=>'nullable',
+            'montantUnitaire'=>'nullable'
+        ]);
 
-        $suppliers = Supplier::create($suppliersForm);
+        
+            
+        $suppliers = Supplier::create($supplierItems);
+
 
         return redirect('/');
     }

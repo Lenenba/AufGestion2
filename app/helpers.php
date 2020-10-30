@@ -27,3 +27,15 @@ use Illuminate\Support\Facades\Http;
 
       return $objects;
   }
+
+  function listElts2($liens)
+  {
+      $objects =  Http::withBasicAuth('jules.bilitik@auf.org', '@UFPrima&0racle')
+        ->withHeaders([
+            'content-type' =>'application/json'])
+        ->timeout(1200)
+        ->get($liens)
+        ->json();
+
+      return $objects;
+  }
