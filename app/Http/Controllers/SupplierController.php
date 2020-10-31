@@ -49,30 +49,26 @@ class SupplierController extends Controller
         // site , , , , , , ,, , , , , , , , , , , , , , ,
         // adresses nomAdresse, adresse1, adresse2, pays, ville, codePostal, codeRegionaTelAdresse, codePaysTelAdresse, extensionTelAdresse, TelAdresse, codeRegFaxAdresse, codePaysFaxAdresse, faxAdresse, courrielAdresse, deactivationAdresse, province
         // contact titreCivilité, nomContact, prenomContact, deuxiemePrenomContact, intituleEmploi, codeRegionaTelContact, codePaysTelContact, extensionTelContact, TelContact, codeRegFaxContact, codePaysFaxContact, faxContact, courrielContact
+        
+        
+        $suppliers = Supplier::create($this->validationSupplier());
+
+        $suppliers->ajouterSite($this->validationSite());
+        $suppliers->ajouterAdresse($this->validationAdresse());
 
 
-        $supplierItems = request()->validate([
-            'typeFournisseur' => 'required',
-            'typeOrganisation'=> 'required',
-            'nomFournisseur' => 'nullable',
-            'prestationFourni'=>'nullable',
-            'autreNom' =>'nullable',
-            'nationalite' =>'nullable'
-        ]);
+        if (request()->wantsJson()) {
+            return ['message' => $suppliers->path()];
+        }
 
-        $siteItems = request()->validate([
+        return redirect($suppliers->path());
+    }
+
+
+    private function validationSite()
+    {
+        return request()->validate([
             'nomSite' => 'required',
-            'envoicde'=> 'nullable',
-            'modePaiement' => 'nullable',
-            'courrielSite'=>'nullable',
-            'paieOnRecip' =>'nullable',
-            'conditionPaiement' =>'nullable',
-            'groupePaie'=>'nullable',
-            'tolerancesMontant'=>'nullable',
-            'devise'=>'nullable',
-            'ventilation'=>'nullable',
-            'banque'=>'nullable',
-            'iban'=>'nullable',
             'numeroCompteB'=>'nullable',
             'projet'=>'nullable',
             'domaine'=>'nullable',
@@ -83,14 +79,58 @@ class SupplierController extends Controller
             'debutMobilite'=>'nullable',
             'finMobilite'=>'nullable',
             'discipline'=>'nullable',
-            'montantUnitaire'=>'nullable'
+            'montantUnitaire'=>'nullable',
+            'conditionPaiement' =>'nullable',
+            'modePaiement' => 'required',
+            'groupePaie'=>'required',
+            'courrielSite'=>'nullable',
+            'banque'=>'nullable',
+            'ventilation'=>'nullable',
+            'iban'=>'nullable',
+            'tolerancesMontant'=>'nullable',
+            'devise'=>'nullable',
+            'envoicde'=> 'nullable',
+            'paieOnRecip' =>'nullable'
+        ]);
+    }
+
+    private function validationSupplier()
+    {
+        return request()->validate([
+            'typeFournisseur' => 'required',
+            'typeOrganisation'=> 'required',
+            'nomFournisseur' => 'required|unique:suppliers|max:255|min:5',
+            'prestationFourni'=>'nullable',
+            'autreNom' =>'nullable',
+            'nationalite' =>'nullable',
+            'deactivationEntete'=>'nullable',
+            'dateNaissance'=>'nullable'
+        ]);
+    }
+
+    private function validationAdresse()
+    {
+        $adresse = request()->validate([
+            'nomAdresse' => 'required|min:5',
+            'adresse1'=> 'required|min:3',
+            'adresse2'=> 'required|min:3',
+            'pays'=> 'required',
+            'ville'=> 'required|min:3',
+            'codePostal'=>'',
+            'codeRegionaTelAdresse'=>'nullable|number|max:5',
+            'codePaysTelAdresse'=>'nullable|number|max:5',
+            'extensionTelAdresse'=>'nullable|number|max:5',
+            'TelAdresse'=>'nullable|number|max:10',
+            'codeRegFaxAdresse'=>'nullable|number|max:5',
+            'codePaysFaxAdresse'=>'nullable|number|max:5',
+            'faxAdresse'=>'nullable|number|max:10',
+            'courrielAdresse'=>'nullable',
+            'deactivationAdresse'=>'nullable',
+            'province'=>'',
+            'etat'=>'',
+            'canton'=>''
         ]);
 
-        
-            
-        $suppliers = Supplier::create($supplierItems);
-
-
-        return redirect('/');
+        return $adresse;
     }
 }

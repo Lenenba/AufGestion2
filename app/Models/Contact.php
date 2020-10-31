@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Site extends Model
+class Contact extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = [];
 
     /**
-     * Fournisseur du Sites
+     * Fournisseur du Contact
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -27,63 +27,71 @@
 
                  <!-- ligne 1 -->
 
-                <div class="flex mx-10">
-                    <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
-                        <div class=" mr-2">
-                            <div class="flex">
-                                <label  class="labelInput" >
-                                    Type de Fournisseurs
-                                </label> 
-                                <span class="required text-red-600 ml-3">*</span>
+                <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
+                    <div class="w-1/4 h-8 flex-col mx-6 my-4">
+                        <div class="flex justify-between ">
+                                <div class=" mr-2">
+                                <div class="flex">
+                                    <label  class="labelInput" >
+                                        Type de Fournisseurs
+                                    </label> 
+                                    <span class="required text-red-600 ml-3">*</span>
+                                </div>
+                                <div class="relative">
+                                    <select class="select"  :class="form.errors.typeFournisseur ? 'border-red-500' : 'border-gray-200'"
+                                            v-model="form.typeFournisseur" @click.prevent="allocataire">
+                                        <option disabled value=""></option>
+                                        <option value="SUPPLIER">Fournisseur</option>
+                                        <option value="AUF_ALLOCATAIRE">Auf Allocataire</option>
+                                        <option value="AUF_MISSIONNAIRE">Auf Missionnaire</option>
+                                        <option value="AUF_STAGIAIRE">Auf stagiaire</option>
+                                        <option value="AUF_STAGIAIRE">Auf stagiaire Co-Financé</option>
+                                        <option value="AUF_STAGIAIRE">Auf stagiaire Non-Financé</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="relative">
-                                <select class="select"  :class="form.errors.typeFournisseur ? 'border-red-500' : 'border-gray-200'"
-                                        v-model="form.typeFournisseur" @click.prevent="allocataire">
-                                    <option disabled value=""></option>
-                                    <option value="SUPPLIER">Fournisseur</option>
-                                    <option value="AUF_ALLOCATAIRE">Auf Allocataire</option>
-                                    <option value="AUF_MISSIONNAIRE">Auf Missionnaire</option>
-                                    <option value="AUF_STAGIAIRE">Auf stagiaire</option>
-                                    <option value="AUF_STAGIAIRE">Auf stagiaire Co-Financé</option>
-                                    <option value="AUF_STAGIAIRE">Auf stagiaire Non-Financé</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            <div>
+                                <label class="labelInput" >
+                                    Type d'Organisation
+                                </label>
+                                <div class="relative">
+                                    <div v-if=" form.typeFournisseur === 'SUPPLIER'">
+                                        <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                        v-model="form.typeOrganisation" @click.prevent="allocataire2">
+                                            <option disabled value=""></option>
+                                            <option value="CORPORATION">Societé</option>
+                                            <option value="INDIVIDUAL">Personne Physique</option>
+                                        </select>
+                                    </div>
+                                    <div v-else-if=" form.typeFournisseur === ''">
+                                        <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                        v-model="form.typeOrganisation" @click.prevent="allocataire2">
+                                            <option disabled value=""></option>
+                                            <option value="CORPORATION">Societé</option>
+                                            <option value="INDIVIDUAL">Personne Physique</option>
+                                        </select>
+                                    </div>
+                                    <div v-else>
+                                        <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
+                                        v-model="form.typeOrganisation" disabled>
+                                            <option disabled value=""></option>
+                                            <option value="INDIVIDUAL">Personne Physique</option>
+                                        </select>
+                                    </div>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <label class="labelInput" >
-                                Type d'Organisation
-                            </label>
-                            <div class="relative">
-                                <div v-if=" form.typeFournisseur === 'SUPPLIER'">
-                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
-                                    v-model="form.typeOrganisation" @click.prevent="allocataire2">
-                                        <option disabled value=""></option>
-                                        <option value="CORPORATION">Societé</option>
-                                        <option value="INDIVIDUAL">Personne Physique</option>
-                                    </select>
-                                </div>
-                                <div v-else-if=" form.typeFournisseur === ''">
-                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
-                                    v-model="form.typeOrganisation" @click.prevent="allocataire2">
-                                        <option disabled value=""></option>
-                                        <option value="CORPORATION">Societé</option>
-                                        <option value="INDIVIDUAL">Personne Physique</option>
-                                    </select>
-                                </div>
-                                <div v-else>
-                                    <select class="select" :class="form.errors.typeOrganisation ? 'border-red-500' : 'border-gray-200'"
-                                    v-model="form.typeOrganisation" disabled>
-                                        <option disabled value=""></option>
-                                        <option value="INDIVIDUAL">Personne Physique</option>
-                                    </select>
-                                </div>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
-                            </div>
+                            <span class="text-xs text-red-600  italic text-error" v-if="form.errors.typeOrganisation" v-text="form.errors.typeOrganisation[0]"></span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-red-600 italic text-error mx-4" v-if="form.errors.typeFournisseur" v-text="form.errors.typeFournisseur[0]"></span>
                         </div>
                     </div>
                     <div class="w-1/4 h-8 mx-6 my-4">
@@ -92,12 +100,15 @@
                         </label>
                         <input class="inputText " type="text"  :class="form.errors.nomSite ? 'border-red-500' : 'border-gray-200'" 
                                         v-model="form.nomSite" disabled>
+                        <span class="text-xs text-red-600 italic text-error mx-4" v-if="form.errors.nomSite" v-text="form.errors.nomSite[0]"></span>
                     </div>
                     <div class="w-1/4 h-8 mx-6 my-4">
                         <label class="labelInput" >
                             Nom du l'Adresses
                         </label>
-                        <input class="inputText" type="text" v-model="form.nomSite" disabled>  
+                        <input class="inputText" type="text"  :class="form.errors.nomAdresse ? 'border-red-500' : 'border-gray-200'" 
+                                    v-model="form.nomAdresse" disabled>  
+                        <span class="text-xs text-red-600 italic text-error mx-4" v-if="form.errors.nomAdresse" v-text="form.errors.nomAdresse[0]"></span>
                     </div>
                     <div class="w-1/4 h-8 mx-6 my-4">
                         <span class="labelInput">Titre de Civilité</span>
@@ -136,13 +147,14 @@
          <!-- ligne 2 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <label class="labelInput">
                                 Nom du Fournisseur
                             </label>
                             <input class="uppercase inputText" :class="form.errors.nomFournisseur ? 'border-red-500' : 'border-gray-200'"
                                    type="text" v-model="form.nomFournisseur">
+                            <span class="text-xs text-red-600 italic text-error mx-4" v-if="form.errors.nomFournisseur" v-text="form.errors.nomFournisseur[0]"></span>
                         </div>
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
                                 <div class=" mr-2">
@@ -166,12 +178,12 @@
                                 Mode de Paiement
                                 </label>
                                 <div class="relative">
-                                    <select class="select" :class="form.errors.modePaiement ? 'border-red-500' : 'border-gray-200'"  v-model="form.modePaiement">
+                                    <select class="select" :class="form.errors.modePaiement ? 'border-red-500' : 'border-gray-200'"  v-model="form.modePaiement" required>
                                         <option></option>
-                                        <option>AUF Cheque</option>
-                                        <option>AUF Virement</option>
-                                        <option>AUF Espece</option>
-                                        <option>AUF Electronique</option>
+                                        <option value="Espece" selected>AUF Espece</option>
+                                        <option value="Cheque" >AUF Cheque</option>
+                                        <option value="AUF_Virement">AUF Virement</option>
+                                        <option value="Electronique">AUF Electronique</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -200,7 +212,7 @@
 
                      <!-- ligne 3 -->
                 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <label class="labelInput" >
                                 Autre Nom 
@@ -236,7 +248,7 @@
                     <!-- ligne 4 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8  mx-6 my-4">
                         <label class="labelInput" >
                                 Type de Prestation Fournie
@@ -289,7 +301,7 @@
              <!-- ligne 5 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <div :hidden="suppFields">
                                 <span class="labelInput">Titre de Civilité</span>
@@ -325,7 +337,7 @@
                                     Groupe de Paie
                                 </label>
                                 <div class="relative">
-                                    <select class="select" :class="form.errors.groupePaie ? 'border-red-500' : 'border-gray-200'" v-model="form.groupePaie">
+                                    <select class="select" :class="form.errors.groupePaie ? 'border-red-500' : 'border-gray-200'" v-model="form.groupePaie" required>
                                         <option></option>
                                         <option v-for="paygroup in paigroup" :key="paygroup.index" :value="paygroup.LookupCode">{{ paygroup.DisplayedField.substring(0,30) }}</option>
                                     </select>
@@ -355,7 +367,7 @@
 
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <div :hidden="suppFields">
                                 <label class="labelInput" >
@@ -399,13 +411,13 @@
                                 <label class="block tracking-wide text-gray-500 text-xs font-bold mb-2" >
                                     Code Régionale Tel
                                 </label>
-                                <input class="inputText" :class="form.errors.codeRegionTelAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codeRegionTelAdresse">
+                                <input class="inputText" :class="form.errors.codeRegionTelAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codeRegionTelAdresse">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Code pays Tel
                                 </label>
-                                <input class="inputText" :class="form.errors.codePaysTelAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codePaysTelAdresse">
+                                <input class="inputText" :class="form.errors.codePaysTelAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codePaysTelAdresse">
                             </div>
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
@@ -413,13 +425,13 @@
                                 <label class="block tracking-wide text-gray-500 text-xs font-bold mb-2" >
                                     Code Régionale Tel
                                 </label>
-                                <input class="inputText" :class="form.errors.codeRegionTelContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codeRegionTelContact">
+                                <input class="inputText" :class="form.errors.codeRegionTelContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codeRegionTelContact">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Code pays Tel
                                 </label>
-                                <input class="inputText" :class="form.errors.codePaysTelContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codePaysTelContact">
+                                <input class="inputText" :class="form.errors.codePaysTelContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codePaysTelContact">
                             </div>
                         </div>
                     </div>
@@ -427,7 +439,7 @@
 
                       <!-- ligne 7 -->
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <div :hidden="suppFields">
                                 <label class="labelInput" >
@@ -438,31 +450,24 @@
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
                                 <label class="labelInput" >
-                                Ventilattion du Passif
+                                Ventilation du Passif
                                 </label>
-                                <div class="relative">
-                                    <select class="select" :class="form.errors.ventilation ? 'border-red-500' : 'border-gray-200'" v-model="form.ventilation">
-                                        <option></option>
-                                        <option>101-000-46710-000-000-000-000-000</option>
-                                        <option>101-000-40100-000-000-000-000-000</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                    </div>
-                                </div>
+                                <input class="inputText" :class="form.errors.ventilation ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.ventilation" 
+                                        disabled>
+                                
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
                             <div class="mr-2">
                                 <label class="labelInput" >
                                     Extension du Tél
                                 </label>
-                                <input class="inputText" :class="form.errors.ExtensionTelAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.ExtensionTelAdresse">
+                                <input class="inputText" :class="form.errors.ExtensionTelAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.ExtensionTelAdresse">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Téléphone
                                 </label>
-                                <input class="inputText" :class="form.errors.TelAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.TelAdresse">
+                                <input class="inputText" :class="form.errors.TelAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.TelAdresse">
                             </div>
                         </div>
                         <div class="w-1/4 h-8 flex mx-6 my-4">
@@ -470,13 +475,13 @@
                                 <label class="labelInput" >
                                     Extension du Tél
                                 </label>
-                                <input class="inputText" :class="form.errors.ExtensionTelContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.ExtensionTelContact">
+                                <input class="inputText" :class="form.errors.ExtensionTelContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.ExtensionTelContact">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Téléphone
                                 </label>
-                                <input class="inputText" :class="form.errors.TelContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.TelContact">
+                                <input class="inputText" :class="form.errors.TelContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.TelContact">
                             </div>
                         </div>
                     </div>
@@ -485,7 +490,7 @@
 <!-- ligne 8 -->
 
 
-                <div class="flex mx-10">
+                <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <div :hidden="suppFields">
                                 <label class="labelInput" >
@@ -513,13 +518,13 @@
                                 <label class="block tracking-wide text-gray-500 text-xs font-bold mb-2" >
                                     Code Régionale Fax
                                 </label>
-                                <input class="inputText" :class="form.errors.codeRegFaxAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codeRegFaxAdresse">
+                                <input class="inputText" :class="form.errors.codeRegFaxAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codeRegFaxAdresse">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Code pays Fax
                                 </label>
-                                <input class="inputText" :class="form.errors.codePaysFaxAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codePaysFaxAdresse">
+                                <input class="inputText" :class="form.errors.codePaysFaxAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codePaysFaxAdresse">
                             </div>
                         </div>
                         <div class="w-1/4 h-8 flex  mx-6 my-4">
@@ -527,13 +532,13 @@
                                 <label class="block tracking-wide text-gray-500 text-xs font-bold mb-2" >
                                     Code Régionale Fax
                                 </label>
-                                <input class="inputText" :class="form.errors.codeRegFaxContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.codeRegFaxContact">
+                                <input class="inputText" :class="form.errors.codeRegFaxContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.codeRegFaxContact">
                             </div>
                             <div>
                                 <label class="labelInput" >
                                     Code pays Fax
                                 </label>
-                                <input class="inputText" :class="form.errors.codePaysFaxContact ? 'border-red-500' : 'border-gray-200'"  type="text" v-model="form.codePaysFaxContact">
+                                <input class="inputText" :class="form.errors.codePaysFaxContact ? 'border-red-500' : 'border-gray-200'"  type="number" v-model="form.codePaysFaxContact">
                             </div>
                         </div>
                     </div>
@@ -543,7 +548,7 @@
                     <!-- Ligne 9 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 flex justify-between mx-6 my-4">
                             <div :hidden="suppFields">
                                 <label class="labelInput" >
@@ -568,20 +573,20 @@
                             <label class="labelInput" >
                                 Fax
                             </label>
-                            <input class="inputText" :class="form.errors.faxAdresse ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.faxAdresse">
+                            <input class="inputText" :class="form.errors.faxAdresse ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.faxAdresse">
                         </div>
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <label class="labelInput" >
                                 Fax
                             </label>
-                        <input class="inputText" :class="form.errors.faxContact ? 'border-red-500' : 'border-gray-200'" type="text" v-model="form.faxContact">
+                        <input class="inputText" :class="form.errors.faxContact ? 'border-red-500' : 'border-gray-200'" type="number" v-model="form.faxContact">
                         </div>
                     </div>
 
 
               <!-- ligne 10 -->
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                             <div :hidden="suppFields">
 
@@ -647,7 +652,7 @@
              <!-- ligne 11 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
                         </div>
@@ -696,7 +701,7 @@
                      <!-- ligne 12 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
                         </div>
@@ -769,7 +774,7 @@
                     <!-- ligne 13 -->
 
 
-                    <div class="flex mx-10">
+                    <div class="flex mx-10" :class="Object.keys(form.errors).length == 0? '' : 'my-10'">
                         <div class="w-1/4 h-8 mx-6 my-4">
                         
                         </div>
@@ -890,13 +895,13 @@
                     // site fields
                     nomSite : '',
                     courrielSite:'',
-                    envoicde:'',
-                    modePaiement:'',
-                    paieOnRecip:'',
+                    envoicde:'NONE',
+                    modePaiement:'Espece',
+                    paieOnRecip:'0',
                     groupePaie:'',
                     conditionPaiement:'',
                     tolerancesMontant:'',
-                    ventilation:'',
+                    ventilation:'101-000-40100-000-000-000-000-000',
                     banque:'',
                     iban:'',
                     numeroCompteB:'',
@@ -910,10 +915,12 @@
                     finMobilité:'',
                     discipline:'',
                     montantUnitaire:'',
+                    devise:'EUR',
 
                     //adresse fields
+                    nomAdresse:'',
                     adresse1:'',
-                    adresse1:'',
+                    adresse2:'',
                     pays:'',
                     ville:'',    
                     codePostal:'',
@@ -949,16 +956,16 @@
         },
         methods: {
             valeurSite(){
-                return this.form.nomSite = this.form.pays + "-" + this.form.ville         
+                return this.form.nomSite = this.form.pays + "-" + this.form.ville, this.form.nomAdresse = this.form.pays + "-" + this.form.ville     
             },
 
             allocataire(){
                 if (this.form.typeFournisseur !== 'SUPPLIER') {
                 
-                    return this.form.typeOrganisation = "INDIVIDUAL", this.suppFields = false  
+                    return this.form.typeOrganisation = "INDIVIDUAL", this.suppFields = false, this.form.ventilation="101-000-46710-000-000-000-000-000"
 
                 }else{
-                    return this.form.typeOrganisation = "", this.suppFields = true  
+                    return this.form.typeOrganisation = "", this.suppFields = true, this.form.ventilation="101-000-40100-000-000-000-000-000"
                 }
             },
 

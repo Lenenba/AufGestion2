@@ -22,6 +22,8 @@ class CreateSuppliersTable extends Migration
             $table->string('prestationFourni')->nullable();
             $table->integer('numero')->nullable();
             $table->enum('typeOrganisation', ['CORPORATION', 'INDIVIDUAL'])->default('CORPORATION');
+            $table->timestamp('deactivationEntete')->nullable();
+            $table->timestamp('dateNaissance')->nullable();
             $table->enum('statut', ['DFCG', 'COMPTABLE', 'DEMANDEUR', 'BROUILLON', 'A SUPPRIMER'])->default('BROUILLON');
             $table->timestamps();
         });

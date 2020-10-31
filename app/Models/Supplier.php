@@ -13,13 +13,13 @@ class Supplier extends Model
 
 
     /**
-     * Le fournisseur du site.
+     * Les site du fournisseur.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function sites()
     {
-        return $this->hasMany(Site::class)->latest('updated_at');
+        return $this->hasMany(Site::class);
     }
 
     /**
@@ -31,6 +31,50 @@ class Supplier extends Model
     public function ajouterSite($site)
     {
         return $this->sites()->create($site);
+    }
+
+
+
+    /**
+     * Les adresses du fournisseur.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function adresses()
+    {
+        return $this->hasMany(Adresse::class);
+    }
+
+    /**
+     * ajouter des adresses au supplier.
+     *
+     * @param $site
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ajouterAdresse($adresse)
+    {
+        return $this->adresses()->create($adresse);
+    }
+
+    /**
+    * Les contacts du fournisseur.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+    /**
+     * ajouter des contacts au fournisseur.
+     *
+     * @param $site
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ajouterContact($contact)
+    {
+        return $this->contacts()->create($contact);
     }
 
     /**
