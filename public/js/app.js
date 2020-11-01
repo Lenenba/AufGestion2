@@ -2951,6 +2951,156 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['pays', 'nationalite', 'paigroup', 'project', 'typemobilite', 'domaine', 'etablissemn', 'devise', 'discipline', 'region', 'paymentterm', 'tolerancemontant'],
@@ -3032,6 +3182,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     valeurSite: function valeurSite() {
       return this.form.nomSite = this.form.pays + "-" + this.form.ville, this.form.nomAdresse = this.form.pays + "-" + this.form.ville;
+    },
+    nomContact: function nomContact() {
+      if (this.form.typeOrganisation === 'INDIVIDUAL') {
+        return this.form.titreCivilite = this.form.titreCiviliteE, this.form.nomContact = this.form.nomEntete, this.form.prenomContact = this.form.prenomEntete, this.form.deuxiemePrenomContact = this.form.deuxiemePrenomEntete;
+      }
     },
     allocataire: function allocataire() {
       if (this.form.typeFournisseur !== 'SUPPLIER') {
@@ -39637,7 +39792,14 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "typeFournisseur" in _vm.form.errors ||
+            "typeOrganisation" in _vm.form.errors ||
+            "nomSite" in _vm.form.errors ||
+            "nomAdresse" in _vm.form.errors ||
+            "titreCivilite" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
@@ -39661,6 +39823,7 @@ var render = function() {
                       class: _vm.form.errors.typeFournisseur
                         ? "border-red-500"
                         : "border-gray-200",
+                      attrs: { required: "" },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -39745,11 +39908,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", [
-                _c("label", { staticClass: "labelInput" }, [
-                  _vm._v(
-                    "\n                                    Type d'Organisation\n                                "
-                  )
-                ]),
+                _vm._m(2),
                 _vm._v(" "),
                 _c("div", { staticClass: "relative" }, [
                   _vm.form.typeFournisseur === "SUPPLIER"
@@ -39769,6 +39928,7 @@ var render = function() {
                             class: _vm.form.errors.typeOrganisation
                               ? "border-red-500"
                               : "border-gray-200",
+                            attrs: { required: "" },
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -39825,6 +39985,7 @@ var render = function() {
                             class: _vm.form.errors.typeOrganisation
                               ? "border-red-500"
                               : "border-gray-200",
+                            attrs: { required: "" },
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -39880,7 +40041,7 @@ var render = function() {
                             class: _vm.form.errors.typeOrganisation
                               ? "border-red-500"
                               : "border-gray-200",
-                            attrs: { disabled: "" },
+                            attrs: { disabled: "", required: "" },
                             on: {
                               change: function($event) {
                                 var $$selectedVal = Array.prototype.filter
@@ -39947,7 +40108,7 @@ var render = function() {
             _c("div", [
               _vm.form.errors.typeOrganisation
                 ? _c("span", {
-                    staticClass: "text-xs text-red-600  italic text-error",
+                    staticClass: "text-xs text-red-600 italic text-error",
                     domProps: {
                       textContent: _vm._s(_vm.form.errors.typeOrganisation[0])
                     }
@@ -39958,7 +40119,7 @@ var render = function() {
             _c("div", [
               _vm.form.errors.typeFournisseur
                 ? _c("span", {
-                    staticClass: "text-xs text-red-600 italic text-error mx-4",
+                    staticClass: "text-xs text-red-600 italic text-error",
                     domProps: {
                       textContent: _vm._s(_vm.form.errors.typeFournisseur[0])
                     }
@@ -39968,11 +40129,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                Nom du Site\n                        "
-              )
-            ]),
+            _vm._m(3),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -39987,7 +40144,7 @@ var render = function() {
               class: _vm.form.errors.nomSite
                 ? "border-red-500"
                 : "border-gray-200",
-              attrs: { type: "text", disabled: "" },
+              attrs: { type: "text", disabled: "", required: "" },
               domProps: { value: _vm.form.nomSite },
               on: {
                 input: function($event) {
@@ -40008,11 +40165,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                            Nom du l'Adresses\n                        "
-              )
-            ]),
+            _vm._m(4),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -40027,7 +40180,7 @@ var render = function() {
               class: _vm.form.errors.nomAdresse
                 ? "border-red-500"
                 : "border-gray-200",
-              attrs: { type: "text", disabled: "" },
+              attrs: { type: "text", disabled: "", required: "" },
               domProps: { value: _vm.form.nomAdresse },
               on: {
                 input: function($event) {
@@ -40054,193 +40207,96 @@ var render = function() {
               _vm._v("Titre de Civilité")
             ]),
             _vm._v(" "),
-            !this.suppFields
-              ? _c("div", [
-                  _c("div", { staticClass: "mt-2" }, [
-                    _c(
-                      "label",
+            _c("div", { staticClass: "mt-2" }, [
+              _c(
+                "label",
+                { staticClass: "inline-flex items-center justify-between" },
+                [
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "inline-flex items-center justify-between"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.titreCiviliteE,
-                              expression: "form.titreCiviliteE"
-                            }
-                          ],
-                          staticClass: "form-radio border",
-                          class: _vm.form.errors.nomSite
-                            ? "border-red-500"
-                            : "border-gray-200",
-                          attrs: {
-                            type: "radio",
-                            value: "Mr.",
-                            disabled: !this.suppFields
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.form.titreCiviliteE, "Mr.")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.form, "titreCiviliteE", "Mr.")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
-                          },
-                          [_vm._v("Mr")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "inline-flex items-center ml-6" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.titreCiviliteE,
-                              expression: "form.titreCiviliteE"
-                            }
-                          ],
-                          staticClass: "form-radio border",
-                          class: _vm.form.errors.nomSite
-                            ? "border-red-500"
-                            : "border-gray-200",
-                          attrs: {
-                            type: "radio",
-                            value: "Mme.",
-                            disabled: !this.suppFields
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.form.titreCiviliteE, "Mme.")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.form,
-                                "titreCiviliteE",
-                                "Mme."
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
-                          },
-                          [_vm._v("Mme")]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              : _c("div", [
-                  _c("div", { staticClass: "mt-2" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "inline-flex items-center justify-between"
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.titreCivilite,
-                              expression: "form.titreCivilite"
-                            }
-                          ],
-                          staticClass: "form-radio border",
-                          class: _vm.form.errors.nomSite
-                            ? "border-red-500"
-                            : "border-gray-200",
-                          attrs: {
-                            type: "radio",
-                            value: "Mr.",
-                            disabled: !this.suppFields
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.form.titreCivilite, "Mr.")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.form, "titreCivilite", "Mr.")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
-                          },
-                          [_vm._v("Mr")]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "inline-flex items-center ml-6" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.titreCivilite,
-                              expression: "form.titreCivilite"
-                            }
-                          ],
-                          staticClass: "form-radio border",
-                          class: _vm.form.errors.nomSite
-                            ? "border-red-500"
-                            : "border-gray-200",
-                          attrs: {
-                            type: "radio",
-                            value: "Mme.",
-                            disabled: !this.suppFields
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.form.titreCivilite, "Mme.")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.form, "titreCivilite", "Mme.")
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
-                          },
-                          [_vm._v("Mme")]
-                        )
-                      ]
-                    )
-                  ])
-                ])
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.titreCivilite,
+                        expression: "form.titreCivilite"
+                      }
+                    ],
+                    staticClass: "form-radio border",
+                    class: _vm.form.errors.titreCivilite
+                      ? "border-red-500"
+                      : "border-gray-200",
+                    attrs: {
+                      type: "radio",
+                      value: "Mr.",
+                      disabled: !this.suppFields
+                    },
+                    domProps: {
+                      checked: _vm._q(_vm.form.titreCivilite, "Mr.")
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.$set(_vm.form, "titreCivilite", "Mr.")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
+                    },
+                    [_vm._v("Mr")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("label", { staticClass: "inline-flex items-center ml-6" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.titreCivilite,
+                      expression: "form.titreCivilite"
+                    }
+                  ],
+                  staticClass: "form-radio border",
+                  class: _vm.form.errors.titreCivilite
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: {
+                    type: "radio",
+                    value: "Mme.",
+                    disabled: !this.suppFields
+                  },
+                  domProps: { checked: _vm._q(_vm.form.titreCivilite, "Mme.") },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "titreCivilite", "Mme.")
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "block  tracking-wide text-gray-500 text-xs font-bold mx-2"
+                  },
+                  [_vm._v("Mme")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.titreCivilite
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error mx-4",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.titreCivilite[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -40249,15 +40305,18 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "nomFournisseur" in _vm.form.errors ||
+            "envoicde" in _vm.form.errors ||
+            "modePaiement" in _vm.form.errors ||
+            "adresse1" in _vm.form.errors ||
+            "nomContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                Nom du Fournisseur\n                            "
-              )
-            ]),
+            _vm._m(5),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -40272,7 +40331,7 @@ var render = function() {
               class: _vm.form.errors.nomFournisseur
                 ? "border-red-500"
                 : "border-gray-200",
-              attrs: { type: "text" },
+              attrs: { type: "text", required: "" },
               domProps: { value: _vm.form.nomFournisseur },
               on: {
                 input: function($event) {
@@ -40286,7 +40345,7 @@ var render = function() {
             _vm._v(" "),
             _vm.form.errors.nomFournisseur
               ? _c("span", {
-                  staticClass: "text-xs text-red-600 italic text-error mx-4",
+                  staticClass: "text-xs text-red-600 italic text-error",
                   domProps: {
                     textContent: _vm._s(_vm.form.errors.nomFournisseur[0])
                   }
@@ -40294,14 +40353,12 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "w-1/4 h-8 flex justify-between mx-6 my-4" },
-            [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
               _c("div", { staticClass: " mr-2" }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Envoie du Bon de Commande\n                                "
+                    "\n                                        Envoie du Bon de Commande\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -40393,7 +40450,7 @@ var render = function() {
               _c("div", [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                Mode de Paiement\n                                "
+                    "\n                                    Mode de Paiement\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -40486,15 +40543,33 @@ var render = function() {
                   )
                 ])
               ])
-            ]
-          ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.envoicde
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.typeOrganisation[0])
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.modePaiement
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.typeFournisseur[0])
+                    }
+                  })
+                : _vm._e()
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                    Ligne d'adresse 1\n                            "
-              )
-            ]),
+            _vm._m(6),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -40509,7 +40584,7 @@ var render = function() {
               class: _vm.form.errors.adresse1
                 ? "border-red-500"
                 : "border-gray-200",
-              attrs: { type: "text" },
+              attrs: { type: "text", required: "" },
               domProps: { value: _vm.form.adresse1 },
               on: {
                 input: function($event) {
@@ -40519,7 +40594,14 @@ var render = function() {
                   _vm.$set(_vm.form, "adresse1", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.adresse1
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: { textContent: _vm._s(_vm.form.errors.adresse1[0]) }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -40529,59 +40611,39 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            !this.suppFields
-              ? _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.nomEntete,
-                        expression: "form.nomEntete"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.nomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.nomEntete },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "nomEntete", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              : _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.nomContact,
-                        expression: "form.nomContact"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.nomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.nomContact },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "nomContact", $event.target.value)
-                      }
-                    }
-                  })
-                ])
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.nomContact,
+                  expression: "form.nomContact"
+                }
+              ],
+              staticClass: "inputText",
+              class: _vm.form.errors.nomContact
+                ? "border-red-500"
+                : "border-gray-200",
+              attrs: { type: "text", disabled: !this.suppFields },
+              domProps: { value: _vm.form.nomContact },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "nomContact", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.form.errors.nomContact
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.nomContact[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -40590,15 +40652,17 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "autreNom" in _vm.form.errors ||
+            "courrielSite" in _vm.form.errors ||
+            "adresse2" in _vm.form.errors ||
+            "prenomContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                Autre Nom \n                            "
-              )
-            ]),
+            _vm._m(7),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -40623,7 +40687,14 @@ var render = function() {
                   _vm.$set(_vm.form, "autreNom", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.autreNom
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: { textContent: _vm._s(_vm.form.errors.autreNom[0]) }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -40656,15 +40727,20 @@ var render = function() {
                   _vm.$set(_vm.form, "courrielSite", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.courrielSite
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.courrielSite[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                ligne d'adresse 2\n                            "
-              )
-            ]),
+            _vm._m(8),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -40689,7 +40765,14 @@ var render = function() {
                   _vm.$set(_vm.form, "adresse2", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.adresse2
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: { textContent: _vm._s(_vm.form.errors.adresse2[0]) }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -40699,59 +40782,39 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            !this.suppFields
-              ? _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.prenomEntete,
-                        expression: "form.prenomEntete"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.prenomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.prenomEntete },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "prenomEntete", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              : _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.prenomContact,
-                        expression: "form.prenomContact"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.prenomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.prenomContact },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "prenomContact", $event.target.value)
-                      }
-                    }
-                  })
-                ])
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.prenomContact,
+                  expression: "form.prenomContact"
+                }
+              ],
+              staticClass: "inputText",
+              class: _vm.form.errors.prenomContact
+                ? "border-red-500"
+                : "border-gray-200",
+              attrs: { type: "text", disabled: !this.suppFields },
+              domProps: { value: _vm.form.prenomContact },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "prenomContact", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.form.errors.prenomContact
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.prenomContact[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -40760,7 +40823,13 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "prestationFourni" in _vm.form.errors ||
+            "pays" in _vm.form.errors ||
+            "ville" in _vm.form.errors ||
+            "deuxiemePrenomContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8  mx-6 my-4" }, [
@@ -40793,7 +40862,16 @@ var render = function() {
                   _vm.$set(_vm.form, "prestationFourni", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.prestationFourni
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.prestationFourni[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -40851,17 +40929,24 @@ var render = function() {
                 },
                 [_vm._v(" Payer a la Réception ")]
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.paieOnRecip
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.paieOnRecip[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "w-1/4 h-8 flex justify-between mx-6 my-4" },
-            [
+          _c("div", { staticClass: "w-1/4 h-8  flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
               _c("div", { staticClass: "mr-2" }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Pays\n                                "
+                    "\n                                        Pays\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -40952,7 +41037,7 @@ var render = function() {
               _c("div", [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Ville\n                                "
+                    "\n                                        Ville\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -40982,8 +41067,26 @@ var render = function() {
                   }
                 })
               ])
-            ]
-          ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.ville
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.ville[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.pays
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.pays[0]) }
+                  })
+                : _vm._e()
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
             _c("label", { staticClass: "labelInput" }, [
@@ -40992,67 +41095,45 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            !this.suppFields
-              ? _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.deuxiemePrenomEntete,
-                        expression: "form.deuxiemePrenomEntete"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.deuxiemePrenomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.deuxiemePrenomEntete },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "deuxiemePrenomEntete",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              : _c("div", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.deuxiemePrenomContact,
-                        expression: "form.deuxiemePrenomContact"
-                      }
-                    ],
-                    staticClass: "inputText",
-                    class: _vm.form.errors.deuxiemePrenomContact
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { type: "text", disabled: !this.suppFields },
-                    domProps: { value: _vm.form.deuxiemePrenomContact },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "deuxiemePrenomContact",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.deuxiemePrenomContact,
+                  expression: "form.deuxiemePrenomContact"
+                }
+              ],
+              staticClass: "inputText",
+              class: _vm.form.errors.deuxiemePrenomContact
+                ? "border-red-500"
+                : "border-gray-200",
+              attrs: { type: "text", disabled: !this.suppFields },
+              domProps: { value: _vm.form.deuxiemePrenomContact },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.form,
+                    "deuxiemePrenomContact",
+                    $event.target.value
+                  )
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.form.errors.deuxiemePrenomContact
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(
+                      _vm.form.errors.deuxiemePrenomContact[0]
+                    )
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -41061,7 +41142,14 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "titreCiviliteE" in _vm.form.errors ||
+            "conditionPaiement" in _vm.form.errors ||
+            "groupePaie" in _vm.form.errors ||
+            "codePostal" in _vm.form.errors ||
+            "intituleEmploi" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -41093,6 +41181,7 @@ var render = function() {
                         checked: _vm._q(_vm.form.titreCiviliteE, "Mr.")
                       },
                       on: {
+                        mouseleave: _vm.nomContact,
                         change: function($event) {
                           return _vm.$set(_vm.form, "titreCiviliteE", "Mr.")
                         }
@@ -41129,6 +41218,7 @@ var render = function() {
                       checked: _vm._q(_vm.form.titreCiviliteE, "Mme.")
                     },
                     on: {
+                      mouseleave: _vm.nomContact,
                       change: function($event) {
                         return _vm.$set(_vm.form, "titreCiviliteE", "Mme.")
                       }
@@ -41145,188 +41235,217 @@ var render = function() {
                   )
                 ])
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.titreCiviliteE
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.titreCiviliteE[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex  mx-6 my-4" }, [
-            _c("div", { staticClass: " mr-2" }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Conditions de Paiement\n                                "
-                )
+          _c("div", { staticClass: "w-1/4 h-8 flex-col  mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
+              _c("div", { staticClass: " mr-2" }, [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Conditions de Paiement\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.conditionPaiement,
+                          expression: "form.conditionPaiement"
+                        }
+                      ],
+                      staticClass: "select",
+                      class: _vm.form.errors.conditionPaiement
+                        ? "border-red-500"
+                        : "border-gray-200",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "conditionPaiement",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option"),
+                      _vm._v(" "),
+                      _vm._l(_vm.paymentterm, function(paymentterms) {
+                        return _c("option", { key: paymentterms.index }, [
+                          _vm._v(_vm._s(paymentterms.Name))
+                        ])
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current h-4 w-4",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.conditionPaiement,
-                        expression: "form.conditionPaiement"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.conditionPaiement
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "conditionPaiement",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.paymentterm, function(paymentterms) {
-                      return _c("option", { key: paymentterms.index }, [
-                        _vm._v(_vm._s(paymentterms.Name))
-                      ])
-                    })
-                  ],
-                  2
-                ),
+              _c("div", [
+                _vm._m(9),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.groupePaie,
+                          expression: "form.groupePaie"
                         }
-                      },
-                      [
-                        _c("path", {
+                      ],
+                      staticClass: "select",
+                      class: _vm.form.errors.groupePaie
+                        ? "border-red-500"
+                        : "border-gray-200",
+                      attrs: { required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "groupePaie",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option"),
+                      _vm._v(" "),
+                      _vm._l(_vm.paigroup, function(paygroup) {
+                        return _c(
+                          "option",
+                          {
+                            key: paygroup.index,
+                            domProps: { value: paygroup.LookupCode }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(paygroup.DisplayedField.substring(0, 30))
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current h-4 w-4",
                           attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20"
                           }
-                        })
-                      ]
-                    )
-                  ]
-                )
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Groupe de Paie\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.groupePaie,
-                        expression: "form.groupePaie"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.groupePaie
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    attrs: { required: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "groupePaie",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+              _vm.form.errors.groupePaie
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.codePostal[0])
                     }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.paigroup, function(paygroup) {
-                      return _c(
-                        "option",
-                        {
-                          key: paygroup.index,
-                          domProps: { value: paygroup.LookupCode }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(paygroup.DisplayedField.substring(0, 30))
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
-                        })
-                      ]
-                    )
-                  ]
-                )
-              ])
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.conditionPaiement
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.codePostal[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -41360,7 +41479,16 @@ var render = function() {
                   _vm.$set(_vm.form, "codePostal", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.codePostal
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.codePostal[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -41393,7 +41521,16 @@ var render = function() {
                   _vm.$set(_vm.form, "intituleEmploi", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.intituleEmploi
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.intituleEmploi[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -41402,7 +41539,15 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "nomEntete" in _vm.form.errors ||
+            "devise" in _vm.form.errors ||
+            "codeRegionTelAdresse" in _vm.form.errors ||
+            "codePaysTelAdresse" in _vm.form.errors ||
+            "codeRegionTelContact" in _vm.form.errors ||
+            "codePaysTelContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -41429,6 +41574,7 @@ var render = function() {
                 attrs: { type: "text" },
                 domProps: { value: _vm.form.nomEntete },
                 on: {
+                  mouseleave: _vm.nomContact,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -41437,354 +41583,437 @@ var render = function() {
                   }
                 }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.nomEntete
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.nomEntete[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: " mr-2" }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Tolerances montant\n                                "
-                )
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: " mr-2" }, [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Tolerances montant\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.tolerancesMontant,
+                          expression: "form.tolerancesMontant"
+                        }
+                      ],
+                      staticClass: "select",
+                      class: _vm.form.errors.tolerancesMontant
+                        ? "border-red-500"
+                        : "border-gray-200",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "tolerancesMontant",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option"),
+                      _vm._v(" "),
+                      _vm._l(_vm.tolerancemontant, function(tolerancemontants) {
+                        return _c(
+                          "option",
+                          {
+                            key: tolerancemontants.index,
+                            domProps: { value: tolerancemontants.ToleranceId }
+                          },
+                          [_vm._v(_vm._s(tolerancemontants.Description))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current h-4 w-4",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.tolerancesMontant,
-                        expression: "form.tolerancesMontant"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.nomEntete
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "tolerancesMontant",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.tolerancemontant, function(tolerancemontants) {
-                      return _c(
-                        "option",
-                        {
-                          key: tolerancemontants.index,
-                          domProps: { value: tolerancemontants.ToleranceId }
-                        },
-                        [_vm._v(_vm._s(tolerancemontants.Description))]
-                      )
-                    })
-                  ],
-                  2
-                ),
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Devise\n                                    "
+                  )
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
+                _c("div", { staticClass: "relative" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.devise,
+                          expression: "form.devise"
                         }
-                      },
-                      [
-                        _c("path", {
+                      ],
+                      staticClass: "select",
+                      class: _vm.form.errors.devise
+                        ? "border-red-500"
+                        : "border-gray-200",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "devise",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option"),
+                      _vm._v(" "),
+                      _vm._l(_vm.devise, function(devises) {
+                        return _c(
+                          "option",
+                          {
+                            key: devises.index,
+                            domProps: { value: devises.Value }
+                          },
+                          [_vm._v(_vm._s(devises.Description.substring(0, 25)))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current h-4 w-4",
                           attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20"
                           }
-                        })
-                      ]
-                    )
-                  ]
-                )
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ])
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Devise\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.devise,
-                        expression: "form.devise"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.devise
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "devise",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+              _vm.form.errors.devise
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.devise[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.tolerancesMontant
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.tolerancesMontant[0])
                     }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.devise, function(devises) {
-                      return _c(
-                        "option",
-                        {
-                          key: devises.index,
-                          domProps: { value: devises.Value }
-                        },
-                        [_vm._v(_vm._s(devises.Description.substring(0, 25)))]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
+                  })
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
                 _c(
-                  "div",
+                  "label",
                   {
                     staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                      "block tracking-wide text-gray-500 text-xs font-bold mb-2"
                   },
                   [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
-                        })
-                      ]
+                    _vm._v(
+                      "\n                                        Code Régionale Tel\n                                    "
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codeRegionTelAdresse,
+                      expression: "form.codeRegionTelAdresse"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codeRegionTelAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codeRegionTelAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codeRegionTelAdresse",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Code pays Tel\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codePaysTelAdresse,
+                      expression: "form.codePaysTelAdresse"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codePaysTelAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codePaysTelAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codePaysTelAdresse",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "block tracking-wide text-gray-500 text-xs font-bold mb-2"
-                },
-                [
-                  _vm._v(
-                    "\n                                    Code Régionale Tel\n                                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codeRegionTelAdresse,
-                    expression: "form.codeRegionTelAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codeRegionTelAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codeRegionTelAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.form,
-                      "codeRegionTelAdresse",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Code pays Tel\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codePaysTelAdresse,
-                    expression: "form.codePaysTelAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codePaysTelAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codePaysTelAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _vm.form.errors.codeRegionTelAdresse
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.form.errors.codeRegionTelAdresse[0]
+                      )
                     }
-                    _vm.$set(
-                      _vm.form,
-                      "codePaysTelAdresse",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "block tracking-wide text-gray-500 text-xs font-bold mb-2"
-                },
-                [
-                  _vm._v(
-                    "\n                                    Code Régionale Tel\n                                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codeRegionTelContact,
-                    expression: "form.codeRegionTelContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codeRegionTelContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codeRegionTelContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.form,
-                      "codeRegionTelContact",
-                      $event.target.value
-                    )
-                  }
-                }
-              })
+                  })
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Code pays Tel\n                                "
-                )
+              _vm.form.errors.codePaysTelAdresse
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.codePaysTelAdresse[0])
+                    }
+                  })
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block tracking-wide text-gray-500 text-xs font-bold mb-2"
+                  },
+                  [
+                    _vm._v(
+                      "\n                                        Code Régionale Tel\n                                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codeRegionTelContact,
+                      expression: "form.codeRegionTelContact"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codeRegionTelContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codeRegionTelContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codeRegionTelContact",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codePaysTelContact,
-                    expression: "form.codePaysTelContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codePaysTelContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codePaysTelContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Code pays Tel\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codePaysTelContact,
+                      expression: "form.codePaysTelContact"
                     }
-                    _vm.$set(
-                      _vm.form,
-                      "codePaysTelContact",
-                      $event.target.value
-                    )
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codePaysTelContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codePaysTelContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codePaysTelContact",
+                        $event.target.value
+                      )
+                    }
                   }
-                }
-              })
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.codeRegionTelContact
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.form.errors.codeRegionTelContact[0]
+                      )
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.codePaysTelContact
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.codePaysTelContact[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ])
         ]
@@ -41794,7 +42023,15 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "prenomEntete" in _vm.form.errors ||
+            "ventilation" in _vm.form.errors ||
+            "ExtensionTelAdresse" in _vm.form.errors ||
+            "TelAdresse" in _vm.form.errors ||
+            "ExtensionTelContact" in _vm.form.errors ||
+            "TelContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -41821,6 +42058,7 @@ var render = function() {
                 attrs: { type: "text" },
                 domProps: { value: _vm.form.prenomEntete },
                 on: {
+                  mouseleave: _vm.nomContact,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -41829,13 +42067,22 @@ var render = function() {
                   }
                 }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _vm.form.errors.prenomEntete
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.prenomEntete[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
             _c("label", { staticClass: "labelInput" }, [
               _vm._v(
-                "\n                                Ventilation du Passif\n                                "
+                "\n                                Ventilation du Passif\n                            "
               )
             ]),
             _vm._v(" "),
@@ -41862,150 +42109,211 @@ var render = function() {
                   _vm.$set(_vm.form, "ventilation", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.ventilation
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.ventilation[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Extension du Tél\n                                "
-                )
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Extension du Tél\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.ExtensionTelAdresse,
+                      expression: "form.ExtensionTelAdresse"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.ExtensionTelAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.ExtensionTelAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "ExtensionTelAdresse",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.ExtensionTelAdresse,
-                    expression: "form.ExtensionTelAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.ExtensionTelAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.ExtensionTelAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Téléphone\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.TelAdresse,
+                      expression: "form.TelAdresse"
                     }
-                    _vm.$set(
-                      _vm.form,
-                      "ExtensionTelAdresse",
-                      $event.target.value
-                    )
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.TelAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.TelAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "TelAdresse", $event.target.value)
+                    }
                   }
-                }
-              })
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Téléphone\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.TelAdresse,
-                    expression: "form.TelAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.TelAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.TelAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _vm.form.errors.TelAdresse
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.TelAdresse[0])
                     }
-                    _vm.$set(_vm.form, "TelAdresse", $event.target.value)
-                  }
-                }
-              })
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.ExtensionTelAdresse
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.form.errors.ExtensionTelAdresse[0]
+                      )
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Extension du Tél\n                                "
-                )
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Extension du Tél\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.ExtensionTelContact,
+                      expression: "form.ExtensionTelContact"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.ExtensionTelContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.ExtensionTelContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "ExtensionTelContact",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.ExtensionTelContact,
-                    expression: "form.ExtensionTelContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.ExtensionTelContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.ExtensionTelContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Téléphone\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.TelContact,
+                      expression: "form.TelContact"
                     }
-                    _vm.$set(
-                      _vm.form,
-                      "ExtensionTelContact",
-                      $event.target.value
-                    )
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.TelContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.TelContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "TelContact", $event.target.value)
+                    }
                   }
-                }
-              })
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Téléphone\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.TelContact,
-                    expression: "form.TelContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.TelContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.TelContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _vm.form.errors.ExtensionTelContact
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.form.errors.ExtensionTelContact[0]
+                      )
                     }
-                    _vm.$set(_vm.form, "TelContact", $event.target.value)
-                  }
-                }
-              })
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.TelContact
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.TelContact[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ])
         ]
@@ -42015,7 +42323,16 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "deuxiemePrenomEntete" in _vm.form.errors ||
+            "banque" in _vm.form.errors ||
+            "iban" in _vm.form.errors ||
+            "codeRegFaxAdresse" in _vm.form.errors ||
+            "codePaysFaxAdresse" in _vm.form.errors ||
+            "codeRegFaxContact" in _vm.form.errors ||
+            "codePaysFaxContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -42042,6 +42359,7 @@ var render = function() {
                 attrs: { type: "text" },
                 domProps: { value: _vm.form.deuxiemePrenomEntete },
                 on: {
+                  mouseleave: _vm.nomContact,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -42054,239 +42372,316 @@ var render = function() {
                   }
                 }
               })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "block tracking-wide text-gray-500 text-xs font-bold mb-2"
-                },
-                [
-                  _vm._v(
-                    "\n                                    Nom de la Banque\n                                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.banque,
-                    expression: "form.banque"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.banque
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "text" },
-                domProps: { value: _vm.form.banque },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "banque", $event.target.value)
-                  }
-                }
-              })
             ]),
             _vm._v(" "),
-            _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                IBAN\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.iban,
-                    expression: "form.iban"
+            _vm.form.errors.deuxiemePrenomEntete
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.deuxiemePrenomEntete[0])
                   }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.iban
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "text" },
-                domProps: { value: _vm.form.iban },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "iban", $event.target.value)
-                  }
-                }
-              })
-            ])
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "block tracking-wide text-gray-500 text-xs font-bold mb-2"
-                },
-                [
-                  _vm._v(
-                    "\n                                    Code Régionale Fax\n                                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codeRegFaxAdresse,
-                    expression: "form.codeRegFaxAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codeRegFaxAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codeRegFaxAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "codeRegFaxAdresse", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Code pays Fax\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codePaysFaxAdresse,
-                    expression: "form.codePaysFaxAdresse"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codePaysFaxAdresse
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codePaysFaxAdresse },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.form,
-                      "codePaysFaxAdresse",
-                      $event.target.value
+                    staticClass:
+                      "block tracking-wide text-gray-500 text-xs font-bold mb-2"
+                  },
+                  [
+                    _vm._v(
+                      "\n                                        Nom de la Banque\n                                    "
                     )
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex  mx-6 my-4" }, [
-            _c("div", { staticClass: "mr-2" }, [
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "block tracking-wide text-gray-500 text-xs font-bold mb-2"
-                },
-                [
-                  _vm._v(
-                    "\n                                    Code Régionale Fax\n                                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codeRegFaxContact,
-                    expression: "form.codeRegFaxContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codeRegFaxContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codeRegFaxContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.banque,
+                      expression: "form.banque"
                     }
-                    _vm.$set(_vm.form, "codeRegFaxContact", $event.target.value)
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.banque
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form.banque },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "banque", $event.target.value)
+                    }
                   }
-                }
-              })
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                    IBAN\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.iban,
+                      expression: "form.iban"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.iban
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form.iban },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "iban", $event.target.value)
+                    }
+                  }
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("div", [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Code pays Fax\n                                "
-                )
+              _vm.form.errors.iban
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.iban[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.banque
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.banque[0]) }
+                  })
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block tracking-wide text-gray-500 text-xs font-bold mb-2"
+                  },
+                  [
+                    _vm._v(
+                      "\n                                        Code Régionale Fax\n                                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codeRegFaxAdresse,
+                      expression: "form.codeRegFaxAdresse"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codeRegFaxAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codeRegFaxAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codeRegFaxAdresse",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.codePaysFaxContact,
-                    expression: "form.codePaysFaxContact"
-                  }
-                ],
-                staticClass: "inputText",
-                class: _vm.form.errors.codePaysFaxContact
-                  ? "border-red-500"
-                  : "border-gray-200",
-                attrs: { type: "number" },
-                domProps: { value: _vm.form.codePaysFaxContact },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Code pays Fax\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codePaysFaxAdresse,
+                      expression: "form.codePaysFaxAdresse"
                     }
-                    _vm.$set(
-                      _vm.form,
-                      "codePaysFaxContact",
-                      $event.target.value
-                    )
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codePaysFaxAdresse
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codePaysFaxAdresse },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codePaysFaxAdresse",
+                        $event.target.value
+                      )
+                    }
                   }
-                }
-              })
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.iban
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.iban[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.banque
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.banque[0]) }
+                  })
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 flex-col  mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c("div", { staticClass: "mr-2" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block tracking-wide text-gray-500 text-xs font-bold mb-2"
+                  },
+                  [
+                    _vm._v(
+                      "\n                                        Code Régionale Fax\n                                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codeRegFaxContact,
+                      expression: "form.codeRegFaxContact"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codeRegFaxContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codeRegFaxContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codeRegFaxContact",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                        Code pays Fax\n                                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.codePaysFaxContact,
+                      expression: "form.codePaysFaxContact"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.codePaysFaxContact
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.form.codePaysFaxContact },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "codePaysFaxContact",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.iban
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.iban[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.banque
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.banque[0]) }
+                  })
+                : _vm._e()
             ])
           ])
         ]
@@ -42296,17 +42691,22 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "deactivationEntete" in _vm.form.errors ||
+            "dateNaissance" in _vm.form.errors ||
+            "numeroCompteB" in _vm.form.errors ||
+            "faxAdresse" in _vm.form.errors ||
+            "faxContact" in _vm.form.errors
+              ? "my-12"
+              : ""
         },
         [
-          _c(
-            "div",
-            { staticClass: "w-1/4 h-8 flex justify-between mx-6 my-4" },
-            [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
               _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Date de Deactivation\n                                "
+                    "\n                                        Date de Deactivation\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -42343,7 +42743,7 @@ var render = function() {
               _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Date de Naissance\n                                "
+                    "\n                                        Date de Naissance\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -42372,8 +42772,19 @@ var render = function() {
                   }
                 })
               ])
-            ]
-          ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.dateNaissance
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.dateNaissance[0])
+                    }
+                  })
+                : _vm._e()
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
             _c("label", { staticClass: "labelInput" }, [
@@ -42405,7 +42816,16 @@ var render = function() {
                   _vm.$set(_vm.form, "numeroCompteB", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.numeroCompteB
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.numeroCompteB[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -42438,7 +42858,16 @@ var render = function() {
                   _vm.$set(_vm.form, "faxAdresse", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.faxAdresse
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.faxAdresse[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -42471,7 +42900,16 @@ var render = function() {
                   _vm.$set(_vm.form, "faxContact", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.faxContact
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.faxContact[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -42480,7 +42918,14 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "nationalite" in _vm.form.errors ||
+            "domaine" in _vm.form.errors ||
+            "discipline" in _vm.form.errors ||
+            "courrielAdresse" in _vm.form.errors ||
+            "CourrielContact" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -42566,18 +43011,123 @@ var render = function() {
                     )
                   ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.form.errors.nationalite
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.nationalite[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c(
-              "div",
-              { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
-              [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c(
+                "div",
+                { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
+                [
+                  _c("label", { staticClass: "labelInput" }, [
+                    _vm._v(
+                      "\n                                    Domaine\n                                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "relative" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.domaine,
+                            expression: "form.domaine"
+                          }
+                        ],
+                        staticClass: "select",
+                        class: _vm.form.errors.domaine
+                          ? "border-red-500"
+                          : "border-gray-200",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "domaine",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option"),
+                        _vm._v(" "),
+                        _vm._l(_vm.domaine, function(domaines) {
+                          return _c(
+                            "option",
+                            {
+                              key: domaines.index,
+                              domProps: { value: domaines.Value }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(domaines.Description.substring(0, 35))
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                    Domaine\n                                    "
+                    "\n                                        Discipline\n                                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -42589,12 +43139,12 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.domaine,
-                          expression: "form.domaine"
+                          value: _vm.form.discipline,
+                          expression: "form.discipline"
                         }
                       ],
                       staticClass: "select",
-                      class: _vm.form.errors.domaine
+                      class: _vm.form.errors.discipline
                         ? "border-red-500"
                         : "border-gray-200",
                       on: {
@@ -42609,7 +43159,7 @@ var render = function() {
                             })
                           _vm.$set(
                             _vm.form,
-                            "domaine",
+                            "discipline",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -42620,16 +43170,16 @@ var render = function() {
                     [
                       _c("option"),
                       _vm._v(" "),
-                      _vm._l(_vm.domaine, function(domaines) {
+                      _vm._l(_vm.discipline, function(disciplines) {
                         return _c(
                           "option",
                           {
-                            key: domaines.index,
-                            domProps: { value: domaines.Value }
+                            key: disciplines.index,
+                            domProps: { value: disciplines.discipline }
                           },
                           [
                             _vm._v(
-                              _vm._s(domaines.Description.substring(0, 35))
+                              _vm._s(disciplines.discipline.substring(0, 35))
                             )
                           ]
                         )
@@ -42666,101 +43216,29 @@ var render = function() {
                     ]
                   )
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { attrs: { hidden: _vm.suppFields } }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Discipline\n                                    "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.discipline,
-                        expression: "form.discipline"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.discipline
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "discipline",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.discipline, function(disciplines) {
-                      return _c(
-                        "option",
-                        {
-                          key: disciplines.index,
-                          domProps: { value: disciplines.discipline }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(disciplines.discipline.substring(0, 35))
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
-                        })
-                      ]
-                    )
-                  ]
-                )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.domaine
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.domaine[0])
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.discipline
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.discipline[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -42794,7 +43272,16 @@ var render = function() {
                   _vm.$set(_vm.form, "courrielAdresse", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.courrielAdresse
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.courrielAdresse[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
@@ -42827,7 +43314,16 @@ var render = function() {
                   _vm.$set(_vm.form, "CourrielContact", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.CourrielContact
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.CourrielContact[0])
+                  }
+                })
+              : _vm._e()
           ])
         ]
       ),
@@ -42836,19 +43332,120 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "region" in _vm.form.errors ||
+            "mobilite" in _vm.form.errors ||
+            "deactivationAdresse" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c(
-              "div",
-              { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
-              [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c(
+                "div",
+                { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
+                [
+                  _c("label", { staticClass: "labelInput" }, [
+                    _vm._v(
+                      "\n                                        Region\n                                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "relative" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.region,
+                            expression: "form.region"
+                          }
+                        ],
+                        staticClass: "select",
+                        class: _vm.form.errors.region
+                          ? "border-red-500"
+                          : "border-gray-200",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "region",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option"),
+                        _vm._v(" "),
+                        _vm._l(_vm.region, function(regions) {
+                          return _c(
+                            "option",
+                            {
+                              key: regions.index,
+                              domProps: { value: regions.Value }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(regions.Description.substring(0, 35))
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                Region\n                                "
+                    "\n                                    Type de Mobilité\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -42860,12 +43457,12 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.region,
-                          expression: "form.region"
+                          value: _vm.form.mobilite,
+                          expression: "form.mobilite"
                         }
                       ],
                       staticClass: "select",
-                      class: _vm.form.errors.region
+                      class: _vm.form.errors.mobilite
                         ? "border-red-500"
                         : "border-gray-200",
                       on: {
@@ -42880,7 +43477,7 @@ var render = function() {
                             })
                           _vm.$set(
                             _vm.form,
-                            "region",
+                            "mobilite",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -42891,14 +43488,14 @@ var render = function() {
                     [
                       _c("option"),
                       _vm._v(" "),
-                      _vm._l(_vm.region, function(regions) {
+                      _vm._l(_vm.typemobilite, function(typemobilites) {
                         return _c(
                           "option",
                           {
-                            key: regions.index,
-                            domProps: { value: regions.Value }
+                            key: typemobilites.index,
+                            domProps: { value: typemobilites.Value }
                           },
-                          [_vm._v(_vm._s(regions.Description.substring(0, 35)))]
+                          [_vm._v(_vm._s(typemobilites.Description))]
                         )
                       })
                     ],
@@ -42933,97 +43530,27 @@ var render = function() {
                     ]
                   )
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { attrs: { hidden: _vm.suppFields } }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                Type de Mobilité\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.mobilite,
-                        expression: "form.mobilite"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.mobilite
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "mobilite",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.typemobilite, function(typemobilites) {
-                      return _c(
-                        "option",
-                        {
-                          key: typemobilites.index,
-                          domProps: { value: typemobilites.Value }
-                        },
-                        [_vm._v(_vm._s(typemobilites.Description))]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
-                        })
-                      ]
-                    )
-                  ]
-                )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.region
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.region[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.mobilite
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.mobilite[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
@@ -43057,7 +43584,16 @@ var render = function() {
                   _vm.$set(_vm.form, "deactivationAdresse", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.deactivationAdresse
+              ? _c("span", {
+                  staticClass: "text-xs text-red-600 italic text-error",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.deactivationAdresse[0])
+                  }
+                })
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" })
@@ -43068,19 +43604,124 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "etablismnOrigine" in _vm.form.errors ||
+            "etablismnAcceuil" in _vm.form.errors ||
+            "etat" in _vm.form.errors ||
+            "province" in _vm.form.errors ||
+            "canton" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
           _vm._v(" "),
-          _c("div", { staticClass: "w-1/4 h-8 flex mx-6 my-4" }, [
-            _c(
-              "div",
-              { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
-              [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex" }, [
+              _c(
+                "div",
+                { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
+                [
+                  _c("label", { staticClass: "labelInput" }, [
+                    _vm._v(
+                      "\n                                    Etablissement Origine\n                                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "relative" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.etablismnOrigine,
+                            expression: "form.etablismnOrigine"
+                          }
+                        ],
+                        staticClass: "select",
+                        class: _vm.form.errors.etablismnOrigine
+                          ? "border-red-500"
+                          : "border-gray-200",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "etablismnOrigine",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option"),
+                        _vm._v(" "),
+                        _vm._l(_vm.etablissemn, function(etablissemns) {
+                          return _c(
+                            "option",
+                            {
+                              key: etablissemns.index,
+                              domProps: { value: etablissemns.Id }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  etablissemns.Description.substring(0, 35)
+                                )
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
-                    "\n                                Etablissement Origine\n                                "
+                    "\n                                    Etablissement Acceuil\n                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -43092,12 +43733,12 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.etablismnOrigine,
-                          expression: "form.etablismnOrigine"
+                          value: _vm.form.etablismnAcceuil,
+                          expression: "form.etablismnAcceuil"
                         }
                       ],
                       staticClass: "select",
-                      class: _vm.form.errors.etablismnOrigine
+                      class: _vm.form.errors.etablismnAcceuil
                         ? "border-red-500"
                         : "border-gray-200",
                       on: {
@@ -43112,7 +43753,7 @@ var render = function() {
                             })
                           _vm.$set(
                             _vm.form,
-                            "etablismnOrigine",
+                            "etablismnAcceuil",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -43169,108 +43810,36 @@ var render = function() {
                     ]
                   )
                 ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { attrs: { hidden: _vm.suppFields } }, [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                Etablissement Acceuil\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.etablismnAcceuil,
-                        expression: "form.etablismnAcceuil"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.etablismnAcceuil
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "etablismnAcceuil",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.etablissemn, function(etablissemns) {
-                      return _c(
-                        "option",
-                        {
-                          key: etablissemns.index,
-                          domProps: { value: etablissemns.Id }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(etablissemns.Description.substring(0, 35))
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
-                        })
-                      ]
-                    )
-                  ]
-                )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.etablismnAcceuil
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.etablismnAcceuil[0])
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.etablismnOrigine
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.etablismnOrigine[0])
+                    }
+                  })
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }, [
             _vm.form.pays === "US"
               ? _c("div", { attrs: { hidden: false } }, [
-                  _vm._m(2),
+                  _vm._m(10),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -43295,11 +43864,20 @@ var render = function() {
                         _vm.$set(_vm.form, "etat", $event.target.value)
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.form.errors.etat
+                    ? _c("span", {
+                        staticClass: "text-xs text-red-600 italic text-error",
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.etat[0])
+                        }
+                      })
+                    : _vm._e()
                 ])
               : _vm.form.pays === "CA"
               ? _c("div", { attrs: { hidden: false } }, [
-                  _vm._m(3),
+                  _vm._m(11),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -43324,11 +43902,20 @@ var render = function() {
                         _vm.$set(_vm.form, "province", $event.target.value)
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.form.errors.province
+                    ? _c("span", {
+                        staticClass: "text-xs text-red-600 italic text-error",
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.province[0])
+                        }
+                      })
+                    : _vm._e()
                 ])
               : _vm.form.pays === "ZA"
               ? _c("div", { attrs: { hidden: false } }, [
-                  _vm._m(4),
+                  _vm._m(12),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -43353,7 +43940,16 @@ var render = function() {
                         _vm.$set(_vm.form, "canton", $event.target.value)
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.form.errors.canton
+                    ? _c("span", {
+                        staticClass: "text-xs text-red-600 italic text-error",
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.canton[0])
+                        }
+                      })
+                    : _vm._e()
                 ])
               : _vm._e()
           ]),
@@ -43366,15 +43962,17 @@ var render = function() {
         "div",
         {
           staticClass: "flex mx-10",
-          class: Object.keys(_vm.form.errors).length == 0 ? "" : "my-10"
+          class:
+            "debutMobilité" in _vm.form.errors ||
+            "finMobilité" in _vm.form.errors
+              ? "my-10"
+              : ""
         },
         [
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "w-1/4 h-8 flex justify-between mx-6 my-4" },
-            [
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
               _c("div", { attrs: { hidden: _vm.suppFields } }, [
                 _c("label", { staticClass: "labelInput" }, [
                   _vm._v(
@@ -43440,8 +44038,30 @@ var render = function() {
                   }
                 })
               ])
-            ]
-          ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.debutMobilité
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.debutMobilité[0])
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.finMobilité
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.finMobilité[0])
+                    }
+                  })
+                : _vm._e()
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
           _vm._v(" "),
@@ -43449,144 +44069,180 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "flex mx-10" }, [
-        _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-1/4 h-8 flex justify-between mx-6 my-4" }, [
-          _c(
-            "div",
-            { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
-            [
-              _c("label", { staticClass: "labelInput" }, [
-                _vm._v(
-                  "\n                                    Projet\n                                    "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "relative" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.projet,
-                        expression: "form.projet"
-                      }
-                    ],
-                    staticClass: "select",
-                    class: _vm.form.errors.projet
-                      ? "border-red-500"
-                      : "border-gray-200",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "projet",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option"),
-                    _vm._v(" "),
-                    _vm._l(_vm.project, function(projects) {
-                      return _c(
-                        "option",
-                        {
-                          key: projects.index,
-                          domProps: { value: projects.Value }
-                        },
-                        [_vm._v(_vm._s(projects.Description.substring(0, 35)))]
-                      )
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                  },
-                  [
+      _c(
+        "div",
+        {
+          staticClass: "flex mx-10",
+          class:
+            "projet" in _vm.form.errors || "montantUnitaire" in _vm.form.errors
+              ? "my-10"
+              : ""
+        },
+        [
+          _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 flex-col mx-6 my-4" }, [
+            _c("div", { staticClass: "flex justify-between" }, [
+              _c(
+                "div",
+                { staticClass: "mr-2", attrs: { hidden: _vm.suppFields } },
+                [
+                  _c("label", { staticClass: "labelInput" }, [
+                    _vm._v(
+                      "\n                                        Projet\n                                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "relative" }, [
                     _c(
-                      "svg",
+                      "select",
                       {
-                        staticClass: "fill-current h-4 w-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.projet,
+                            expression: "form.projet"
+                          }
+                        ],
+                        staticClass: "select",
+                        class: _vm.form.errors.projet
+                          ? "border-red-500"
+                          : "border-gray-200",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "projet",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
                         }
                       },
                       [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                          }
+                        _c("option"),
+                        _vm._v(" "),
+                        _vm._l(_vm.project, function(projects) {
+                          return _c(
+                            "option",
+                            {
+                              key: projects.index,
+                              domProps: { value: projects.Value }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(projects.Description.substring(0, 35))
+                              )
+                            ]
+                          )
                         })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293-8.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
                       ]
                     )
-                  ]
-                )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { attrs: { hidden: _vm.suppFields } }, [
+                _c("label", { staticClass: "labelInput" }, [
+                  _vm._v(
+                    "\n                                            Montant Unitaire\n                                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.montantUnitaire,
+                      expression: "form.montantUnitaire"
+                    }
+                  ],
+                  staticClass: "inputText",
+                  class: _vm.form.errors.montantUnitaire
+                    ? "border-red-500"
+                    : "border-gray-200",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.form.montantUnitaire },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "montantUnitaire", $event.target.value)
+                    }
+                  }
+                })
               ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { attrs: { hidden: _vm.suppFields } }, [
-            _c("label", { staticClass: "labelInput" }, [
-              _vm._v(
-                "\n                                        Montant Unitaire\n                                    "
-              )
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.montantUnitaire,
-                  expression: "form.montantUnitaire"
-                }
-              ],
-              staticClass: "inputText",
-              class: _vm.form.errors.montantUnitaire
-                ? "border-red-500"
-                : "border-gray-200",
-              attrs: { type: "text" },
-              domProps: { value: _vm.form.montantUnitaire },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "montantUnitaire", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" })
-      ]),
+            _c("div", [
+              _vm.form.errors.projet
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: { textContent: _vm._s(_vm.form.errors.projet[0]) }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm.form.errors.montantUnitaire
+                ? _c("span", {
+                    staticClass: "text-xs text-red-600 italic text-error",
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.montantUnitaire[0])
+                    }
+                  })
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/4 h-8 mx-6 my-4" })
+        ]
+      ),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(13)
     ]
   )
 }
@@ -43637,6 +44293,118 @@ var staticRenderFns = [
       _c("label", { staticClass: "labelInput" }, [
         _vm._v(
           "\n                                        Type de Fournisseurs\n                                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                        Type d'Organisation\n                                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                Nom du Site\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                Nom du l'Adresses\n                           "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                    Nom du Fournisseur\n                                "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                    Ligne d'adresse 1\n                                "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                    Autre Nom \n                                "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                    ligne d'adresse 2\n                                "
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "required text-red-600 ml-3" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex" }, [
+      _c("label", { staticClass: "labelInput" }, [
+        _vm._v(
+          "\n                                            Groupe de Paie\n                                        "
         )
       ]),
       _vm._v(" "),

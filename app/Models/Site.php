@@ -20,4 +20,14 @@ class Site extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    /**
+     * l'Adresse du Sites
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function adresse()
+    {
+        return $this->belongsTo(Adresse::class);
+    }
 }

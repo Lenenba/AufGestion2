@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adresse;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Http;
 use App\Models\Supplier;
+use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
@@ -44,17 +47,16 @@ class SupplierController extends Controller
 
     public function store()
     {
+        $entete = $this->validationSupplier();
+        $site = $this->validationSite();
+        $adresse = $this->validationAdresse();
+        $contact = $this->validationContact();
 
-        // entete deactivationEntete, dateNaissance, titreCivilité, nomEntete, prenomEntete, deuxiemePrenomEntete, nationalite
-        // site , , , , , , ,, , , , , , , , , , , , , , ,
-        // adresses nomAdresse, adresse1, adresse2, pays, ville, codePostal, codeRegionaTelAdresse, codePaysTelAdresse, extensionTelAdresse, TelAdresse, codeRegFaxAdresse, codePaysFaxAdresse, faxAdresse, courrielAdresse, deactivationAdresse, province
-        // contact titreCivilité, nomContact, prenomContact, deuxiemePrenomContact, intituleEmploi, codeRegionaTelContact, codePaysTelContact, extensionTelContact, TelContact, codeRegFaxContact, codePaysFaxContact, faxContact, courrielContact
         
-        
-        $suppliers = Supplier::create($this->validationSupplier());
-
-        $suppliers->ajouterSite($this->validationSite());
-        $suppliers->ajouterAdresse($this->validationAdresse());
+        $suppliers = Supplier::create($entete);
+        $suppliers->ajouterSite($site);
+        $suppliers->ajouterAdresse($adresse);
+        $suppliers->ajouterContact($contact);
 
 
         if (request()->wantsJson()) {
@@ -62,6 +64,21 @@ class SupplierController extends Controller
         }
 
         return redirect($suppliers->path());
+    }
+
+
+    private function validationSupplier()
+    {
+        return request()->validate([
+            'typeFournisseur' => 'required',
+            'typeOrganisation'=> 'required',
+            'nomFournisseur' => 'required|unique:suppliers|max:255|min:5',
+            'prestationFourni'=>'nullable',
+            'autreNom' =>'nullable',
+            'nationalite' =>'required_if:typeOrganisation,=,INDIVIDUAL',
+            'deactivationEntete'=>'nullable',
+            'dateNaissance'=>'required_if:typeOrganisation,=,INDIVIDUAL'
+        ]);
     }
 
 
@@ -94,43 +111,51 @@ class SupplierController extends Controller
         ]);
     }
 
-    private function validationSupplier()
-    {
-        return request()->validate([
-            'typeFournisseur' => 'required',
-            'typeOrganisation'=> 'required',
-            'nomFournisseur' => 'required|unique:suppliers|max:255|min:5',
-            'prestationFourni'=>'nullable',
-            'autreNom' =>'nullable',
-            'nationalite' =>'nullable',
-            'deactivationEntete'=>'nullable',
-            'dateNaissance'=>'nullable'
-        ]);
-    }
 
     private function validationAdresse()
     {
+        $adresse = new Adresse();
         $adresse = request()->validate([
             'nomAdresse' => 'required|min:5',
             'adresse1'=> 'required|min:3',
             'adresse2'=> 'required|min:3',
             'pays'=> 'required',
             'ville'=> 'required|min:3',
-            'codePostal'=>'',
-            'codeRegionaTelAdresse'=>'nullable|number|max:5',
-            'codePaysTelAdresse'=>'nullable|number|max:5',
-            'extensionTelAdresse'=>'nullable|number|max:5',
-            'TelAdresse'=>'nullable|number|max:10',
+            'codePostal'=>'nullable|required_if:pays,=,FR,CA,US',
+            'codeRegionaTelAdresse'=>'nullable|number|max:5|required_with_all:TelAdresse,codePaysTelAdresse',
+            'codePaysTelAdresse'=>'nullable|number|max:5|required_with_all:TelAdresse,codeRegionaTelAdresse',
+            'extensionTelAdresse'=>'nullable|number|max:5|required_with_all:TelAdresse,codePaysTelAdresse,codeRegionaTelAdresse',
+            'TelAdresse'=>'nullable|number|max:10|required_with:TelAdresse,codePaysTelAdresse,codeRegionaTelAdresse,extensionTelAdresse',
             'codeRegFaxAdresse'=>'nullable|number|max:5',
             'codePaysFaxAdresse'=>'nullable|number|max:5',
             'faxAdresse'=>'nullable|number|max:10',
             'courrielAdresse'=>'nullable',
             'deactivationAdresse'=>'nullable',
-            'province'=>'',
-            'etat'=>'',
-            'canton'=>''
+            'province'=>'required_if:pays,=,CA',
+            'etat'=>'required_if:pays,=,US',
+            'canton'=>'required_if:pays,=,ZA',
         ]);
 
         return $adresse;
+    }
+
+
+    private function validationContact()
+    {
+        return request()->validate([
+            'titreCivilite' =>'required_if:typeOrganisation,=,INDIVIDUAL',
+            'nomContact' => 'required_if:typeOrganisation,=,INDIVIDUAL|min:3',
+            'prenomContact' => 'required_if:typeOrganisation,=,INDIVIDUAL|min:3',
+            'deuxiemePrenomContact' => 'required|min:3',
+            'intituleEmploi' => 'nullable',
+            'codeRegionaTelContact' => 'nullable|number|max:5|required_with_all:TelContact,codePaysTelContact',
+            'codePaysTelContact' => 'nullable|number|max:5|required_with_all:TelContact,codeRegionaTelContact',
+            'extensionTelContact' => 'nullable|number|max:5|required_with_all:TelContact,codeRegionaTelContact,codePaysTelContact',
+            'TelContact' => 'nullable|number|max:10',
+            'codeRegFaxContact' => 'nullable|number|max:5',
+            'codePaysFaxContact' => 'nullable|number|max:5',
+            'faxContact' => 'nullable|number|max:10',
+            'courrielContact' => 'nullable'
+        ]);
     }
 }

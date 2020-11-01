@@ -1,9 +1,9 @@
 <template>
- <modal name="sites-modal" :names=[]> 
-     
-     {{ name }}
+  <modal name="sites-modal" :names=[]> 
+      
+      {{ name }}
 
- </modal>
+  </modal>
 </template>
 
 <script>

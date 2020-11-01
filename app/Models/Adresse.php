@@ -20,4 +20,25 @@ class Adresse extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    /**
+     * Les site de l'adresse.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sites()
+    {
+        return $this->hasMany(Site::class);
+    }
+
+    /**
+    * ajouter des sites a l'adresses.
+    *
+    * @param $site
+    * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function ajouterSite($site)
+    {
+        return $this->sites()->create($site);
+    }
 }

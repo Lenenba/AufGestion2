@@ -36,8 +36,7 @@ class CreateAdressesTable extends Migration
             $table->string('etat')->nullable();
             $table->string('canton')->nullable();
 
-            $table->foreignId('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('Suppliers')->onDelete('cascade');
+            $table->foreignId('supplier_id')->constrained('Suppliers');
             $table->timestamps();
         });
     }

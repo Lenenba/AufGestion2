@@ -16,22 +16,21 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('titreCivilité')->default('Mr.');
-            $table->string('nomContact')->default('John');
-            $table->string('prenomContact')->default('Doe');
-            $table->string('deuxiemePrenomContact')->default('Samuel');
+            $table->string('titreCivilite')->nullable();
+            $table->string('nomContact')->nullable();
+            $table->string('prenomContact')->nullable();
+            $table->string('deuxiemePrenomContact')->nullable();
             $table->string('intituleEmploi')->nullable();
-            $table->string('codeRegionaTelContact')->nullable();
-            $table->string('codePaysTelContact')->nullable();
-            $table->string('extensionTelContact')->nullable();
-            $table->string('TelContact')->nullable();
-            $table->string('codeRegFaxContact')->nullable();
-            $table->string('codePaysFaxContact')->nullable();
-            $table->string('faxContact')->nullable();
+            $table->integer('codeRegionaTelContact')->nullable();
+            $table->integer('codePaysTelContact')->nullable();
+            $table->integer('extensionTelContact')->nullable();
+            $table->integer('TelContact')->nullable();
+            $table->integer('codeRegFaxContact')->nullable();
+            $table->integer('codePaysFaxContact')->nullable();
+            $table->integer('faxContact')->nullable();
             $table->string('courrielContact')->nullable();
 
-            $table->foreignId('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('Suppliers')->onDelete('cascade');
+            $table->foreignId('supplier_id')->constrained('Suppliers');
             $table->timestamps();
         });
     }
