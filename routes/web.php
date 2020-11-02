@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UtilityController;
+
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,5 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/suppliers/create', [SupplierController::class, 'create']);
 Route::post('/suppliers', [SupplierController::class, 'store']);
+
+Route::get('/utility/{search}', [UtilityController::class, 'rechercehFounisseur']);

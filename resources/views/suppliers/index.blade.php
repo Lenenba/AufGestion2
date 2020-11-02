@@ -27,6 +27,8 @@
 
  </div>
 
- @include('partials._table')
+<supplier-search-component></supplier-search-component>
+
+
 
 @endsection

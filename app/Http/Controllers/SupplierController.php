@@ -17,11 +17,10 @@ class SupplierController extends Controller
         $stagiaireN = totalElts('fscmRestApi', 'suppliers', 'q=SupplierTypeCode=AUF_STAGIAIRE_NON_FINANCE&', 'CreationDate');
         $stagiaireCo = totalElts('fscmRestApi', 'suppliers', 'q=SupplierTypeCode=AUF_STAGIAIRE_COFINANCE&', 'CreationDate');
 
-        $suppliers = totalElts('fscmRestApi', 'suppliers', '', 'CreationDate');
 
         $ListeFour = Supplier::all();
 
-        return view('suppliers.index', compact('suppliers', 'regulier', 'allocataire', 'missionnaire', 'membre', 'stagiaire', 'stagiaireN', 'stagiaireCo'));
+        return view('suppliers.index', compact('ListeFour', 'regulier', 'allocataire', 'missionnaire', 'membre', 'stagiaire', 'stagiaireN', 'stagiaireCo'));
     }
 
     public function create()

@@ -30,6 +30,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('dropdown', require('./components/DropdownComponent.vue').default);
 Vue.component('sites-modal', require('./components/SitesModal.vue').default);
 Vue.component('supplier-form-component', require('./components/SupplierFormComponent.vue').default);
+Vue.component('supplier-search-component', require('./components/SupplierSearchComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
