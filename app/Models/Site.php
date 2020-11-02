@@ -30,4 +30,9 @@ class Site extends Model
     {
         return $this->belongsTo(Adresse::class);
     }
+    
+    public function setAdresseIdAttribute($value)
+    {
+        $this->attributes['adresse_id'] = ($value);
+    }
 }

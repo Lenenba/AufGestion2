@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adresse;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Http;
 use App\Models\Supplier;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class SupplierController extends Controller
 {
@@ -52,10 +49,10 @@ class SupplierController extends Controller
         $adresse = $this->validationAdresse();
         $contact = $this->validationContact();
 
-        
         $suppliers = Supplier::create($entete);
+        $adr = $suppliers->ajouterAdresse($adresse);
+        $site = Arr::add($site, 'adresse_id', $adr->id);
         $suppliers->ajouterSite($site);
-        $suppliers->ajouterAdresse($adresse);
         $suppliers->ajouterContact($contact);
 
 
@@ -114,7 +111,6 @@ class SupplierController extends Controller
 
     private function validationAdresse()
     {
-        $adresse = new Adresse();
         $adresse = request()->validate([
             'nomAdresse' => 'required|min:5',
             'adresse1'=> 'required|min:3',
