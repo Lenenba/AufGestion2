@@ -3,19 +3,19 @@
 
 
     <div class="flex items-center mt-20 px-8 py-5">
-       @include('partials._smallCard', ['titre' => 'FOURNISSEURS', 
+       @include('partials._bigCard', ['titre' => 'FOURNISSEURS', 
                                         'elts' => $supplier['totalResults'], 
                                         'color' => 'blue'])
 
-        @include('partials._smallCard', ['titre' => 'EMPLOYÉS', 
+        @include('partials._bigCard', ['titre' => 'EMPLOYÉS', 
                                         'elts' => $employer['totalResults'], 
                                         'color' => 'indigo'])
     
-        @include('partials._smallCard', ['titre' => 'PROJETS', 
+        @include('partials._bigCard', ['titre' => 'PROJETS', 
                                         'elts' => $project['totalResults'], 
                                         'color' => 'green'])
 
-        @include('partials._smallCard', ['titre' => 'COMPTES', 
+        @include('partials._bigCard', ['titre' => 'COMPTES', 
                                         'elts' => $compte['totalResults'], 
                                         'color' => 'orange'])
     </div>
