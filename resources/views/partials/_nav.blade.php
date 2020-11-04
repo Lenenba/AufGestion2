@@ -30,7 +30,7 @@
 
                                 <a href="/suppliers" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">RECHERCHE</a>
                                 <a href="/suppliers/create" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">NOUVEL DEMANDE</a>
-                                <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">SUIVIS DEMANDE</a>
+                                <a href="/suppliers/suivi" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">SUIVIS DEMANDE</a>
                                 <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">LISTE COMPTABLE</a>
 
                             </dropdown>    
@@ -48,6 +48,18 @@
                 </div>  
                 <div class="flex items-center overflow-hidden">
                     <div class="flex mr-5 ">
+                        <div>
+                            <img src="/images/google.png" alt="google" class="h-5 mx-2 sm:ml-0 "> 
+                        </div>
+                        <div>
+                            <img src="/images/github.png" alt="github" class="h-5 mx-2 sm:ml-0 "> 
+                        </div>
+                        <div>
+                            <img src="/images/facebook.png" alt="facebook" class="h-5 mx-2 sm:ml-0 "> 
+                        </div>
+                        <div>
+                            <img src="/images/microsoft.png" alt="microsoft" class="h-5 mx-2 sm:ml-0 "> 
+                        </div>
                         <div class="relative">
                             <span class="relative inline-flex">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 mx-2 text-gray-600  hover:text-gray-400 focus:text-gray-100">
@@ -85,7 +97,7 @@
 
                                 </template>
 
-                                <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">NOTIFICATION</a>
+                                <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">ADMINISTRATION</a>
                                 <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">PROFIL</a>
                                 <a href="#" class="block text-xs text-gray-600 no-underline hover:bg-gray-500 hover:text-white leading-loose px-5">DECONNEXION</a>
 

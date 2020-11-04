@@ -3835,6 +3835,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -46897,20 +46900,35 @@ var render = function() {
                                         "px-2 py-4 whitespace-no-wrap"
                                     },
                                     [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "px-2 text-left text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                          " +
-                                              _vm._s(supp.Status) +
-                                              "\n                                        "
+                                      supp.Status === "ACTIVE"
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "px-2 text-left text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            ACTIF\n                                        "
+                                              )
+                                            ]
                                           )
-                                        ]
-                                      )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      supp.Status === "INACTIVE"
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "px-2 text-left text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            INACTIF\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ]
                                   ),
                                   _vm._v(" "),

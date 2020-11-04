@@ -22,6 +22,8 @@ Route::get('/', [DashboardController::class, 'index']);
 
 Route::get('/suppliers', [SupplierController::class, 'index']);
 Route::get('/suppliers/create', [SupplierController::class, 'create']);
+Route::get('/suppliers/suivi', [SupplierController::class, 'suivi']);
 Route::post('/suppliers', [SupplierController::class, 'store']);
+
 
 Route::get('/utility/{search}', [UtilityController::class, 'rechercehFounisseur']);

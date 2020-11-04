@@ -29,7 +29,9 @@
                 </main>
             </div>
             <footer>
-
+            <main class="bg-gray-100 px-8 py-4 h-64">
+                    @yield('footer')
+                </main>
             </footer>
         </div>
     </body>

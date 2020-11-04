@@ -235,8 +235,11 @@
                                             </div>
                                         </td>
                                         <td class="px-2 py-4 whitespace-no-wrap">
-                                            <span class="px-2 text-left text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                              {{ supp.Status }}
+                                            <span class="px-2 text-left text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800" v-if="supp.Status === 'ACTIVE'" >
+                                                ACTIF
+                                            </span>
+                                            <span class="px-2 text-left text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800" v-if="supp.Status === 'INACTIVE'" >
+                                                INACTIF
                                             </span>
                                         </td>
                                         <td class="px-2 py-4 whitespace-no-wrap text-right text-green-700 hover:text-green-900  text-sm leading-5 font-medium">

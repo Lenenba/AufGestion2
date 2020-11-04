@@ -22,7 +22,7 @@
         <div class="py-2 overflow-hidden flex items-center justify-between rounded-lg px-10 mt-10">
             <div class="text-gray-600 text-sm my-6 bg-white mx-4 w-4/6 px-10 py-10 rounded-lg">
                 <h3 class="text-lg my-4 leading-6 font-medium  text-gray-600">
-                        Liste de demande de creation de Fournisseurs 
+                        Liste de Fournisseurs Recemment Crées
                     
                 </h3>
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"> 

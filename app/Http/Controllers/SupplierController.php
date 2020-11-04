@@ -18,9 +18,9 @@ class SupplierController extends Controller
         $stagiaireCo = totalElts('fscmRestApi', 'suppliers', 'q=SupplierTypeCode=AUF_STAGIAIRE_COFINANCE&', 'CreationDate');
 
 
-        $ListeFour = Supplier::all();
+       
 
-        return view('suppliers.index', compact('ListeFour', 'regulier', 'allocataire', 'missionnaire', 'membre', 'stagiaire', 'stagiaireN', 'stagiaireCo'));
+        return view('suppliers.index', compact('regulier', 'allocataire', 'missionnaire', 'membre', 'stagiaire', 'stagiaireN', 'stagiaireCo'));
     }
 
     public function create()
@@ -37,8 +37,16 @@ class SupplierController extends Controller
         $region = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_regionFournisseurAuf?onlyData=true&limit=490');
         $paymentterm = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/PaymentTermsLookup?onlyData=true&limit=490');
         $tolerancemontant = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/AmountTolerancesLookup');
-        // dd($pays);
+       
+
         return view('suppliers.create', compact('nationalite', 'paigroup', 'pays', 'project', 'typemobilite', 'domaine', 'etablissemn', 'devise', 'discipline', 'region', 'paymentterm', 'tolerancemontant'));
+    }
+
+    public function suivi()
+    {
+        $suppliers = Supplier::paginate(6);
+        
+        return view('suppliers.suivi', compact('suppliers'));
     }
 
     public function store()

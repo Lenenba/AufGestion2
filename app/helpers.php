@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Http;
 
  function totalElts($modules, $elements, $append, $orderby)
  {
-     $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
-                        ->withHeaders([
+     $objects =  Http::withHeaders([
+                            'Authorization' => 'Basic anVsZXMuYmlsaXRpa0BhdWYub3JnOktpbGlhbmU0ODY=',
                             'content-type' =>'application/json'])
                         ->timeout(1200)
                         ->get('https://ejxa.fa.ca2.oraclecloud.com:443/'.$modules.'/resources/11.13.18.05/'.$elements.'?'.$append.'onlyData=true&expand=all&limit=5&totalResults=true&orderBy='.$orderby.':desc')
@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Http;
 
   function listElts($liens)
   {
-      $objects =  Http::withBasicAuth('jules.bilitik@auf.org', 'Kiliane486')
-        ->withHeaders([
+      $objects =  Http::withHeaders([
+            'Authorization' => 'Basic anVsZXMuYmlsaXRpa0BhdWYub3JnOktpbGlhbmU0ODY=',
             'content-type' =>'application/json'])
         ->timeout(1200)
         ->get($liens)
@@ -28,10 +28,11 @@ use Illuminate\Support\Facades\Http;
       return $objects;
   }
 
+
   function listElts2($liens)
   {
-      $objects =  Http::withBasicAuth('jules.bilitik@auf.org', '@UFPrima&0racle')
-        ->withHeaders([
+      $objects =  Http::withHeaders([
+            'Authorization' => 'Basic anVsZXMuYmlsaXRpa0BhdWYub3JnOkBVRlByaW1hJjByYWNsZQ==',
             'content-type' =>'application/json'])
         ->timeout(1200)
         ->get($liens)
