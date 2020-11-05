@@ -1,6 +1,10 @@
 @extends('layouts.layout')
 @section('content')
-
+<nav class="bg-gray-100 px-8 py-5 mx-4 rounded font-sans w-full">
+  <ol class="list-reset flex text-grey-dark">
+    <li><a href="#" class="text-gray-500 italic text-xs">Dashboard</a></li>
+  </ol>
+</nav>
 
     <div class="flex items-center mt-20 px-8 py-5">
        @include('partials._bigCard', ['titre' => 'FOURNISSEURS', 
@@ -18,14 +22,29 @@
         @include('partials._bigCard', ['titre' => 'COMPTES', 
                                         'elts' => $compte['totalResults'], 
                                         'color' => 'orange'])
+
+        @include('partials._bigCard', ['titre' => 'COMPTES', 
+                                        'elts' => $compte['totalResults'], 
+                                        'color' => 'orange'])
     </div>
-        <div class="py-2 overflow-hidden flex items-center justify-between rounded-lg px-10 mt-10">
-            <div class="text-gray-600 text-sm my-6 bg-white mx-4 w-4/6 px-10 py-10 rounded-lg">
-                <h3 class="text-lg my-4 leading-6 font-medium  text-gray-600">
-                        Liste de Fournisseurs Recemment Crées
-                    
-                </h3>
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"> 
+
+    <div class="flex flex-wrap mt-20 px-8 py-5 -mx-4">
+      <div class="w-full mb-6 lg:mb-0 lg:w-1/2 px-4 flex flex-col">
+        <div class="flex-grow flex flex-col bg-white border-t border-b sm:rounded sm:border shadow overflow-hidden">
+          <div class="border-b">
+            <div class="flex justify-between px-6 -mb-px">
+              <h3 class="text-gray-500 italic text-sm mt-6">Liste de Fournisseurs Récemment Chargés</h3>
+              <div class="flex">
+                <button type="button" class="appearance-none py-4 text-grey-dark border-b border-transparent hover:border-grey-dark">
+                    <svg class="h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg"> 
                     <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
@@ -98,71 +117,41 @@
                     </table>
 
                 </div>
-            </div> 
-            <div class="text-gray-600 text-sm my-6 bg-white mx-4 w-4/6 px-10 py-5 rounded-lg">
-            
-                <form class="w-full max-w-lg bg-white rounded-lg px-10 py-10">
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                Nom
-                            </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-                            <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-                        </div>
-                        
-                        <div class="w-full mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                Autre Nom
-                            </label>
-                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full mb-6 md:mb-6">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                Type de Fournisseurs
-                            </label>
-                            <div class="relative">
-                                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                    <option>Fournisseurs</option>
-                                    <option>AUF Allocataire</option>
-                                    <option>AUF Missionnaire</option>
-                                    <option>AUF Stagiaire</option>
-                                    <option>AUF Stagiaire Non Financé</option>
-                                    <option>AUF Stagiaire Co-Financé</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                                Type d'Organisation
-                            </label>
-                            <div class="relative">
-                                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                    <option>Personne Physique</option>
-                                    <option>Societé</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center mt-5">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded-lg shadow-lg focus:outline-none focus:shadow-outline" type="button">
-                            Enregistrer
-                        </button>
-                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 border rounded-lg p-2 border-blue-500 shadow-lg" href="#">
-                            annuler
-                        </a>
-                    </div>
-                </form>
-            </div>  
+          <div class="px-6 py-4">
+            <div class="text-center text-grey">
+            </div>
+          </div>
         </div>
+      </div>
+
+
+
+      <div class="w-full lg:w-1/2 px-4">
+        <div class="bg-white border-t border-b sm:rounded sm:border shadow">
+          <div class="border-b">
+            <div class="flex justify-between px-6 -mb-px">
+              <h3 class="text-gray-500 italic text-sm mt-6">Budget de Projets</h3>
+              <button type="button" class="appearance-none py-4 text-grey-dark border-b border-transparent hover:border-grey-dark">
+                  <svg class="h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="text-center px-6 py-4">
+                <chart-component :project="{{ json_encode($projectB['items'],TRUE) }}"></chart-component>
+            </div>
+          </div>
+          <div class="px-6 py-4">
+            <div class="text-center text-grey">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 @endsection

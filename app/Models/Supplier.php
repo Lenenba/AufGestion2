@@ -84,6 +84,6 @@ class Supplier extends Model
      */
     public function path()
     {
-        return "/suppliers";
+        return "/suppliers/suivi";
     }
 }

@@ -44,7 +44,7 @@ class SupplierController extends Controller
 
     public function suivi()
     {
-        $suppliers = Supplier::paginate(6);
+        $suppliers = Supplier::orderBy('created_at', 'desc')->paginate(6);
         
         return view('suppliers.suivi', compact('suppliers'));
     }
@@ -70,6 +70,19 @@ class SupplierController extends Controller
         return redirect($suppliers->path());
     }
 
+    /**
+     * Destroy the Supplier.
+     *
+     * @param  Supplier $project
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Supplier $supplier)
+    {
+        $supplier->delete();
+        
+        return redirect('/suppliers/suivi');
+    }
 
     private function validationSupplier()
     {

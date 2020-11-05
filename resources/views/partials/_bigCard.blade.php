@@ -1,4 +1,4 @@
-<div class=" flex-1 flex justify-between items-center bg-white shadow-md mx-4 text-sm text-gray-400 border-l-4 border-{{$color}}-700 rounded-lg hover:bg-{{$color}}-100 ">
+<div class=" flex-1 flex justify-between items-center bg-white shadow-md mx-4 text-sm text-gray-400 border-l-4 border-{{$color}}-700 rounded hover:bg-{{$color}}-100 ">
 
 <div class="flex flex-col {{ (Illuminate\Support\Arr::exists(['FOURNISSEURS', 'COMPTES', 'PROJETS', 'EMPLOYÉS'], $titre))? 'ml-10' : 'ml-4'}} items-center justify-items-center my-3">
    <h2 class="flex text-gray-600 text-lg font-semibold"> {{ $titre }}</h2> 

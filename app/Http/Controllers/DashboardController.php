@@ -11,7 +11,7 @@ class DashboardController extends Controller
         $employer =  totalElts('hcmRestApi', 'emps', '', 'CreationDate');
         $compte =  totalElts('crmRestApi', 'accounts', '', 'CreationDate');
 
-
-        return view('dashboard.index', compact('supplier', 'project', 'compte', 'employer'));
+        $projectB = listElts("https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/projectBudgets?q=PlanVersionName+LIKE+'%DM2%'&onlyData=true");
+        return view('dashboard.index', compact('supplier', 'project', 'compte', 'employer', 'projectB'));
     }
 }
