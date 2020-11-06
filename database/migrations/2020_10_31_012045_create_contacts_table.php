@@ -30,7 +30,8 @@ class CreateContactsTable extends Migration
             $table->integer('faxContact')->nullable();
             $table->string('courrielContact')->nullable();
 
-            $table->foreignId('supplier_id')->constrained('Suppliers');
+            $table->foreignId('supplier_id');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->timestamps();
         });
     }

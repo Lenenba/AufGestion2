@@ -15,8 +15,8 @@ export default {
           data: []
         },
         {
-          label: 'Montant Budget',
-          backgroundColor: '#f87979',
+          label: 'Montant Cost',
+          backgroundColor: '#000',
           data: []
         },
       ],
@@ -36,6 +36,7 @@ export default {
       this.project.forEach(element => {
           this.chartdata.labels.push(element.ProjectName.substring(0,10));
           this.chartdata.datasets[0].data.push(element.PFCRawCostAmounts);
+          this.chartdata.datasets[1].data.push(element.PFCBurdenedCostAmounts);
       });
     this.renderChart(this.chartdata, this.options)
   }

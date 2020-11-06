@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class SupplierController extends Controller
 {
@@ -73,15 +75,18 @@ class SupplierController extends Controller
     /**
      * Destroy the Supplier.
      *
-     * @param  Supplier $project
+     * @param  $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
-        $supplier->delete();
-        
-        return redirect('/suppliers/suivi');
+        Supplier::where('id', $id)->delete();
+
+        if (request()->wantsJson()) {
+            return response([], 204);
+        }
+        return redirect()->to('/suppliers');
     }
 
     private function validationSupplier()

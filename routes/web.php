@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/suppliers', [SupplierController::class, 'index']);
-Route::get('/suppliers/create', [SupplierController::class, 'create']);
-Route::get('/suppliers/suivi', [SupplierController::class, 'suivi']);
-Route::post('/suppliers', [SupplierController::class, 'store']);
-Route::delete('/suppliers', [SupplierController::class, 'store']);
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('index');
+Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('create');
+Route::get('/suppliers/suivi', [SupplierController::class, 'suivi'])->name('suivi');
+Route::post('/suppliers', [SupplierController::class, 'store'])->name('store');
+Route::delete('/suppliers/{id}', [SupplierController::class, 'destroy']);
 
 
-Route::get('/utility/{search}', [UtilityController::class, 'rechercehFounisseur']);
+Route::get('/utility/{search}', [UtilityController::class, 'rechercehFounisseur'])->name('helpers');

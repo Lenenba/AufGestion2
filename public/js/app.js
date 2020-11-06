@@ -1935,8 +1935,8 @@ __webpack_require__.r(__webpack_exports__);
           backgroundColor: '#f87979',
           data: []
         }, {
-          label: 'Montant Budget',
-          backgroundColor: '#f87979',
+          label: 'Montant Cost',
+          backgroundColor: '#000',
           data: []
         }]
       },
@@ -1956,6 +1956,8 @@ __webpack_require__.r(__webpack_exports__);
       _this.chartdata.labels.push(element.ProjectName.substring(0, 10));
 
       _this.chartdata.datasets[0].data.push(element.PFCRawCostAmounts);
+
+      _this.chartdata.datasets[1].data.push(element.PFCBurdenedCostAmounts);
     });
     this.renderChart(this.chartdata, this.options);
   }
@@ -2419,39 +2421,185 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    names: Array
-  },
   data: function data() {
     return {
-      name: this.names
+      supplier: '',
+      sites: '',
+      site: false,
+      adresse: false,
+      contact: false
     };
   },
+  mounted: function mounted() {
+    console.log(this.sites);
+  },
   methods: {
-    openModal: function openModal() {
-      this.$modal.show({
-        template: "<span>Hello, {{ name }}!</span>",
-        props: ['name']
-      }, {
-        name: this.name
-      }, {
-        width: 300,
-        height: 300
-      }, {
-        'before-open': this.beforeOpen,
-        'before-close': this.beforeClose
-      });
-    },
     beforeOpen: function beforeOpen(event) {
-      console.log('Opening...');
+      this.supplier = event.params.supplier;
+      this.valeur = event.params.valeur;
+      this.sites = JSON.parse(event.params.sites);
+
+      if ('SupplierSite' in this.sites[0]) {
+        this.site = true;
+      }
+
+      if ('AddressName' in this.sites[0]) {
+        this.adresse = true;
+      }
+
+      if ('Salutation' in this.sites[0]) {
+        this.contact = true;
+      }
+
+      console.log(this.site.length);
     },
     beforeClose: function beforeClose(event) {
-      console.log('Closing...'); // What a gamble... 50% chance to cancel closing
-
-      if (Math.random() < 0.5) {
-        event.cancel();
-      }
+      this.supplier = '';
+      this.sites = '';
+      this.site = '';
+      this.adresse = '';
+      this.contact = '';
     }
   }
 });
@@ -2467,6 +2615,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SupplierForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SupplierForm */ "./resources/js/components/SupplierForm.js");
 //
 //
 //
@@ -2501,13 +2650,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['supplier'],
   data: function data() {
-    return {};
+    return {
+      form: new _SupplierForm__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        id: '',
+        typeFournisseur: '',
+        typeOrganisation: '',
+        nomFournisseur: '',
+        autreNom: '',
+        prestationFourni: '',
+        titreCiviliteE: '',
+        nomEntete: '',
+        prenomEntete: '',
+        deuxiemePrenomEntete: '',
+        deactivationEntete: '',
+        dateNaissance: '',
+        statut: '',
+        created: '',
+        nationalite: ''
+      })
+    };
   },
-  mounted: function mounted() {
-    console.log('mounted...');
+  methods: {
+    beforeOpen: function beforeOpen(event) {
+      this.form.nomFournisseur = event.params.nom;
+      this.form.typeFournisseur = event.params.type;
+      this.form.typeOrganisation = event.params.org;
+      this.form.statut = event.params.statut;
+      this.form.created = event.params.created;
+      this.form.id = event.params.id;
+    },
+    submit: function submit() {
+      this.form.submit('/suppliers/' + this.form.id, 'delete').then(function (response) {
+        return location;
+      });
+      this.$modal.hide('supplier-delete');
+    }
   }
 });
 
@@ -79772,9 +79955,523 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("modal", { attrs: { name: "sites-modal", names: [] } }, [
-    _vm._v(" \n    \n    " + _vm._s(_vm.name) + "\n\n")
-  ])
+  return _c(
+    "modal",
+    {
+      staticClass: "rounded-full",
+      attrs: { name: "site", width: "800", height: "auto" },
+      on: { "before-open": _vm.beforeOpen, "before-close": _vm.beforeClose }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "py-2 overflow-hidden justify-between rounded-lg" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "text-gray-600 text-sm  flex-cols bg-white mx-4 px-10 rounded-lg"
+            },
+            [
+              _vm.site
+                ? _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-lg leading-6 font-medium  text-gray-600 py-4 text-center"
+                    },
+                    [
+                      _vm._v(
+                        "\n\n                    Sites de " +
+                          _vm._s(_vm.supplier) +
+                          "\n                            \n                "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.contact
+                ? _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-lg leading-6 font-medium  text-gray-600 py-4 text-center"
+                    },
+                    [
+                      _vm._v(
+                        "\n\n                    Contacts de " +
+                          _vm._s(_vm.supplier) +
+                          "\n                            \n                "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.adresse
+                ? _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-lg leading-6 font-medium  text-gray-600 py-4 text-center"
+                    },
+                    [
+                      _vm._v(
+                        "\n\n                    Adresses de " +
+                          _vm._s(_vm.supplier) +
+                          "\n                            \n                "
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+                },
+                [
+                  _c(
+                    "table",
+                    { staticClass: "min-w-full divide-y divide-gray-200" },
+                    [
+                      _vm.site
+                        ? _c("thead", [
+                            _c("tr", [
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                               Nom du site\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Site de Paiement\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Type de Paiement\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Status\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.adresse
+                        ? _c("thead", [
+                            _c("tr", [
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Nom de l'Adresse\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Pays\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Ville\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Status\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.contact
+                        ? _c("thead", [
+                            _c("tr", [
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                               Nom Complet\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Intitulé de l'emploie\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Email\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "th",
+                                {
+                                  staticClass:
+                                    "px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Status\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.site
+                        ? _c(
+                            "tbody",
+                            {
+                              staticClass: "bg-white divide-y divide-gray-200"
+                            },
+                            _vm._l(_vm.sites, function(site) {
+                              return _c("tr", { key: site.index }, [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "px-6 py-4 whitespace-no-wrap"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "ml-4" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-xs leading-5 font-medium text-gray-900"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                               " +
+                                              _vm._s(site.SupplierSite) +
+                                              "\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.PayGroup) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.PaymentTerms) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.Status) +
+                                        "\n                                       \n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.adresse
+                        ? _c(
+                            "tbody",
+                            {
+                              staticClass: "bg-white divide-y divide-gray-200"
+                            },
+                            _vm._l(_vm.sites, function(site) {
+                              return _c("tr", { key: site.index }, [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "px-6 py-4 whitespace-no-wrap"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "ml-4" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-xs leading-5 font-medium text-gray-900"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                               " +
+                                              _vm._s(site.AddressName) +
+                                              "\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.Country) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.City) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.Status) +
+                                        "\n                                       \n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.contact
+                        ? _c(
+                            "tbody",
+                            {
+                              staticClass: "bg-white divide-y divide-gray-200"
+                            },
+                            _vm._l(_vm.sites, function(site) {
+                              return _c("tr", { key: site.index }, [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "px-6 py-4 whitespace-no-wrap"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "ml-4" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-xs leading-5 font-medium text-gray-900"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                " +
+                                              _vm._s(site.Salutation) +
+                                              "  " +
+                                              _vm._s(site.FirstName) +
+                                              "  " +
+                                              _vm._s(site.LastName) +
+                                              "\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.JobTitle) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.Email) +
+                                        "\n                                         \n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-center"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                               " +
+                                        _vm._s(site.Status) +
+                                        "\n                                       \n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -79802,7 +80499,8 @@ var render = function() {
     "modal",
     {
       staticClass: "p-10 rounded-lg",
-      attrs: { name: "supplier-delete", height: "auto" }
+      attrs: { name: "supplier-delete", height: "auto" },
+      on: { "before-open": _vm.beforeOpen }
     },
     [
       _c(
@@ -79823,14 +80521,14 @@ var render = function() {
                 _c(
                   "h2",
                   { staticClass: "text-lg font-semibold text-gray-900 -mt-1" },
-                  [_vm._v(_vm._s(_vm.supplier.nomFournisseur))]
+                  [_vm._v(_vm._s(_vm.form.nomFournisseur))]
                 )
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "text-gray-700" }, [
                 _vm._v(
                   " crée il y a " +
-                    _vm._s(_vm._f("moment")(_vm.supplier.created_at, "from")) +
+                    _vm._s(_vm._f("moment")(_vm.form.created, "from")) +
                     " "
                 )
               ]),
@@ -79838,47 +80536,60 @@ var render = function() {
               _c("p", { staticClass: "mt-3 text-gray-700 text-sm" }, [
                 _vm._v(
                   "\n                 " +
-                    _vm._s(_vm.supplier.statut) +
+                    _vm._s(_vm.form.statut) +
                     " - " +
-                    _vm._s(_vm.supplier.typeFournisseur) +
+                    _vm._s(_vm.form.typeFournisseur) +
                     " - " +
-                    _vm._s(_vm.supplier.typeOrganisation) +
+                    _vm._s(_vm.form.typeOrganisation) +
                     "\n             "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "mt-4 flex items-center" }, [
                 _c(
-                  "button",
+                  "form",
                   {
-                    staticClass:
-                      "rounded shadow-md flex items-center bg-gray-500 px-4 py-2 mx-2 text-white hover:bg-red-400"
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.submit($event)
+                      }
+                    }
                   },
                   [
                     _c(
-                      "svg",
+                      "button",
                       {
-                        staticClass: "h-4",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          fill: "none",
-                          viewBox: "0 0 24 24",
-                          stroke: "currentColor"
-                        }
+                        staticClass:
+                          "rounded shadow-md flex items-center bg-gray-500 px-4 py-2 mx-2 text-white hover:bg-red-400"
                       },
                       [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d: "M5 13l4 4L19 7"
-                          }
-                        })
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "h-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "none",
+                              viewBox: "0 0 24 24",
+                              stroke: "currentColor"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                "stroke-width": "2",
+                                d: "M5 13l4 4L19 7"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(
+                          "\n                         Confirmer\n                     "
+                        )
                       ]
-                    ),
-                    _vm._v(
-                      "\n                     Confirmer\n                 "
                     )
                   ]
                 ),
@@ -79887,7 +80598,13 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "rounded shadow-md flex items-center bg-red-500 px-4 py-2 mx-2 text-white hover:bg-red-400"
+                      "rounded shadow-md flex items-center bg-red-500 px-4 py-2 mx-2 text-white hover:bg-red-400",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.$modal.hide("supplier-delete")
+                      }
+                    }
                   },
                   [
                     _c(
@@ -102697,7 +103414,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MO
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_ellipse_progress__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('dropdown', __webpack_require__(/*! ./components/DropdownComponent.vue */ "./resources/js/components/DropdownComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('sites-modal', __webpack_require__(/*! ./components/SitesModal.vue */ "./resources/js/components/SitesModal.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('site-modal', __webpack_require__(/*! ./components/SitesModal.vue */ "./resources/js/components/SitesModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('supplier-delete-modal', __webpack_require__(/*! ./components/SupplierDeleteModal.vue */ "./resources/js/components/SupplierDeleteModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('supplier-form-component', __webpack_require__(/*! ./components/SupplierFormComponent.vue */ "./resources/js/components/SupplierFormComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.component('supplier-search-component', __webpack_require__(/*! ./components/SupplierSearchComponent.vue */ "./resources/js/components/SupplierSearchComponent.vue")["default"]);

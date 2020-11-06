@@ -40,9 +40,12 @@ class CreateSitesTable extends Migration
             $table->string('discipline')->nullable();
             $table->string('montantUnitaire')->nullable();
             
-            $table->foreignId('supplier_id')->constrained('Suppliers');
-            $table->foreignId('adresse_id')->constrained('Adresses');
-
+            $table->foreignId('supplier_id');
+            $table->foreignId('adresse_id');
+            
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->foreign('adresse_id')->references('id')->on('adresses')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
