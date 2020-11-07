@@ -38,9 +38,9 @@
 import SupplierForm from './SupplierForm';
 
 export default {
-    props:['supplier'],
     data(){
         return{
+            supplier:'',
             form: new SupplierForm({
                     
                     id:'',
@@ -62,6 +62,7 @@ export default {
     },
     methods: {
         beforeOpen (event) {
+            // this.supplier = new SupplierForm(JSON.parse(event.params.supplier));
             this.form.nomFournisseur = event.params.nom;
             this.form.typeFournisseur = event.params.type;
             this.form.typeOrganisation = event.params.org;

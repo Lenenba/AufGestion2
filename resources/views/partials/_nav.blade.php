@@ -37,11 +37,20 @@
 
                         </li> <span class="text-gray-600"> | </span>
                         <li>
-                            <div class="flex ml-4 items-center hover:text-gray-400 focus:text-gray-100 ">
+                            <div class="flex mx-4 items-center hover:text-gray-400 focus:text-gray-100 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-gray-600 ">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                                 </svg>
                               PROJETS
+                            </div>    
+                        </li>
+                        </li> <span class="text-gray-600"> | </span>
+                        <li>
+                            <div class="flex ml-4 items-center hover:text-gray-400 focus:text-gray-100 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-gray-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                                </svg>
+                              POSTES
                             </div>    
                         </li>
                     </ul>

@@ -1,5 +1,5 @@
 <template>
-    <modal name="site" class="rounded-full" width="800" height="auto" @before-open="beforeOpen" @before-close="beforeClose" >    
+    <modal name="site" class="rounded-full" width="1000" height="auto" @before-open="beforeOpen" @before-close="beforeClose" >    
         <div class="py-2 overflow-hidden justify-between rounded-lg">
                 <div class="text-gray-600 text-sm  flex-cols bg-white mx-4 px-10 rounded-lg">
                     <h3 class="text-lg leading-6 font-medium  text-gray-600 py-4 text-center" v-if="site">

@@ -6,7 +6,7 @@
   </ol>
 </nav>
 
-    <div class="flex items-center mt-20 px-8 py-5">
+    <div class="lg:flex items-center mt-20 px-8 py-5 l">
        @include('partials._bigCard', ['titre' => 'FOURNISSEURS', 
                                         'elts' => $supplier['totalResults'], 
                                         'color' => 'blue'])
