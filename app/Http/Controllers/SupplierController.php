@@ -202,7 +202,7 @@ class SupplierController extends Controller
         $domaine = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_domaine?onlyData=true&limit=490');
         $etablissemn = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_etablissementAccueil?onlyData=true&limit=490');
         $devise = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_devise?onlyData=true&limit=490');
-        $discipline = listElts2('https://ejxa-test-apps6.builder.ocp.oraclecloud.com/ic/builder/rt/App_FRS_Test/live/resources/data/DomainesEtDisciplines?onlyData=true&limit=200');
+        $discipline = listElts('https://ejxa.fa.ca2.oraclecloud.com/fscmRestApi/resources/11.13.18.05/suppliers/300000023903020/child/DFF/300000023903020/lov/LVVO_nationalite?onlyData=true&limit=400');
         $region = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/child/DFF/300000040964028/lov/LVVO_regionFournisseurAuf?onlyData=true&limit=490');
         $paymentterm = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/PaymentTermsLookup?onlyData=true&limit=490');
         $tolerancemontant = listElts('https://ejxa.fa.ca2.oraclecloud.com:443/fscmRestApi/resources/11.13.18.05/suppliers/300000040964011/child/sites/300000040964028/lov/AmountTolerancesLookup');

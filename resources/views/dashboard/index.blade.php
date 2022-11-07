@@ -12,7 +12,7 @@
                                         'color' => 'blue'])
 
         @include('partials._bigCard', ['titre' => 'EMPLOYÉS', 
-                                        'elts' => $employer['totalResults'], 
+                                        'elts' =>  $supplier['totalResults'], 
                                         'color' => 'indigo'])
     
         @include('partials._bigCard', ['titre' => 'PROJETS', 
@@ -90,7 +90,7 @@
                                         </button>
                                     </div>
                                     <div> 
-                                        <a href="#" class="text-gray-600 mx-2 flex flex-col justify-items-center text-xs hover:text-gray-900" @click="$modal.show('site', { supplier : '{{ utf8_decode($supp['Supplier']) }}', sites:'{{ json_encode($supp['addresses'])}}'})">
+                                        <a href="#" class="text-gray-600 mx-2 flex flex-col justify-items-center text-xs hover:text-gray-900" >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="text-gray-600 h-6" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />

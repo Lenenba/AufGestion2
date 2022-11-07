@@ -85214,7 +85214,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              _vm._s(disciplines.discipline.substring(0, 35))
+                              _vm._s()
                             )
                           ]
                         )

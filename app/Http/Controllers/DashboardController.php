@@ -8,7 +8,7 @@ class DashboardController extends Controller
     {
         $supplier =  totalElts('fscmRestApi', 'suppliers', '', 'CreationDate');
         $project =  totalElts('fscmRestApi', 'projects', '', 'ProjectStartDate');
-        $employer =  totalElts('hcmRestApi', 'emps', '', 'CreationDate');
+        $employer =  totalElts('hcmRestApi', 'suppliers', '', 'CreationDate');
         $compte =  totalElts('crmRestApi', 'accounts', '', 'CreationDate');
         $poste =  totalElts('hcmRestApi', 'positions', '', 'CreationDate');
 
